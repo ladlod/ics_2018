@@ -150,7 +150,7 @@ static int cmd_p(char *args){ //caculation
   if(!success)
     printf("Caculate failed!\n");
   else
-    printf("%lu\n", res);
+    printf("%d\n", res);
   
   return 0;
 }

@@ -5,6 +5,7 @@
  */
 #include <sys/types.h>
 #include <regex.h>
+#include <stdlib.h>
 
 enum {
   TK_NOTYPE = 256, 
@@ -185,7 +186,7 @@ uint32_t caculation(int left, int right, bool *success){
       num = atoi(tokens[left].str);
       break;
     case TK_HEX:
-      sscanf(tokens[left].str, "%x", num);
+      sscanf(tokens[left].str, "%x", &num);
       break;
     default:
       success = false;
@@ -253,6 +254,7 @@ uint32_t caculation(int left, int right, bool *success){
       return -1;
     }
   }
+  return -1;
 }
 
 uint32_t expr(char *e, bool *success) {
@@ -264,13 +266,13 @@ uint32_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   //处理指针和负号
   for(int i = 0; i < nr_token; i++){
-    if(tokens[i].type == TK_MUL && (i == 0) || tokens[i - 1].type != TK_NUMBER && tokens[i - 1].type != TK_HEX
-      && tokens[i - 1].type != TK_RB){ //指针
+    if(tokens[i].type == TK_MUL && ((i == 0) || (tokens[i - 1].type != TK_NUMBER && tokens[i - 1].type != TK_HEX
+      && tokens[i - 1].type != TK_RB))){ //指针
       tokens[i].type = TK_POINT;
       tokens[i].level = 6;
     }
-    if(tokens[i].type == TK_DIV && (i == 0) || tokens[i - 1].type != TK_NUMBER && tokens[i - 1].type != TK_HEX
-      && tokens[i - 1].type != TK_RB){ //负号
+    if(tokens[i].type == TK_DIV && ((i == 0) || (tokens[i - 1].type != TK_NUMBER && tokens[i - 1].type != TK_HEX
+      && tokens[i - 1].type != TK_RB))){ //负号
       tokens[i].type = TK_MINUS;
       tokens[i].level = 6;
     }
