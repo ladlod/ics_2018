@@ -95,7 +95,7 @@ static int cmd_si(char *args){ //single
   }
   char *leftover;
   unsigned long n = strtoul(arg, &leftover, 10);
-  if(leftover != NULL){
+  if(*leftover != '\0'){
     printf("Please input the right arguement!\n");
   }else{
     cpu_exec(n);
@@ -114,7 +114,7 @@ static void printRegster(int size, int index){
 	}
 }
 
-static int cmd_info(char *args){ //info
+static int cmd_info(char *args){ //print info
   if(args == NULL){
     printf("Unknown type!\n");
     return 0;
@@ -138,6 +138,8 @@ static int cmd_info(char *args){ //info
 
   return 0;
 }
+
+
 static int cmd_p(char *args){ //caculation
   if(args == NULL){
     printf("Nothing to caculate!\n");
@@ -146,30 +148,57 @@ static int cmd_p(char *args){ //caculation
   printf("To be completed!\n");
   return 0;
 }
+
+
 static int cmd_x(char *args){ //scan memory
   if(args == NULL){
-    printf("Nothing to Scan!\n");
+    printf("Nothing to scan!\n");
     return 0;
   }
-  printf("To be completed!\n");
+
+  char *Size = strtok(args, " ");
+  int size = -1;
+  sscanf(Size, "%d", &size);
+  if(size < 0){
+    printf("Wrong size to scan!\n");
+    return 0;
+  }
+
+  char *Addr = Size + strlen(Size) + 1;
+
+  char *leftover;
+  uint64_t addr = strtoul(Addr, &leftover, 0);
+  if(*leftover != '\0'){
+    printf("Wrong addr to scan!\n");
+    return 0;
+  }
+
+  for(int i = 0; i < size; i++)
+    printf("%#010X\t\n", vaddr_read(addr + i * 4, 4));
+
   return 0;
 }
-static int cmd_w(char *args){
+
+
+static int cmd_w(char *args){ //set watchpoint
   if(args == NULL){
     printf("Nothing to set!\n");
     return 0;
   }
   printf("To be completed!\n");
   return 0;
-} //set watchpoint
-static int cmd_d(char *args){
+}
+
+
+static int cmd_d(char *args){ //delete watchpoiot
   if(args == NULL){
     printf("Nothing to delete!\n");
     return 0;
   }
   printf("To be completed!\n");
   return 0;
-} //delete watchpoiot
+} 
+
 
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {
