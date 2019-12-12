@@ -56,7 +56,7 @@ static struct {
   /* TODO: Add more commands */
   {"si", "Single step for n", cmd_si},
   {"info", "Print the regsters or watchpoint", cmd_info},
-  {"p", "Caculation the expression", cmd_p},
+  {"p", "Caculate the expression", cmd_p},
   {"x", "Scan the memory", cmd_x},
   {"w", "Set a watchpoint", cmd_w},
   {"d", "Delete a watchpoint", cmd_d}

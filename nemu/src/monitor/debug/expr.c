@@ -10,11 +10,11 @@
 enum {
   TK_NOTYPE = 256, 
   TK_EQ, TK_NEQ, TK_AND, TK_OR, TK_SUB, TK_PLUS, TK_MINUS, TK_G, TK_L,  TK_GE, TK_LE ,
-//等于，  不等于,  与,      或,    减,     加,      负数，     ,大于,小于，   大于等于，小于等于
+//等于 257,不等于 258,与 259,或 260,减 261,加 262,负数 263,大于 264,小于 265,大于等于 266,小于等于 267
   TK_MUL, TK_DIV, TK_NOT, TK_LB, TK_RB,
-//乘，     除,     取反,    左括号, 右括号
+//乘 268,除 269,取反 270,左括号 271,右括号 272
   TK_POINT, TK_NUMBER, TK_HEX
-//指针,       数字,       十六进制
+//指针 273,数字 274,十六进制 275
 /* TODO: Add more token types */
 };
 
@@ -262,6 +262,8 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
+
+
   *success = true;
   /* TODO: Insert codes to evaluate the expression. */
   //处理指针和负号
@@ -276,6 +278,9 @@ uint32_t expr(char *e, bool *success) {
       tokens[i].type = TK_MINUS;
       tokens[i].level = 6;
     }
+  }
+  for(int i = 0; i < nr_token; i++){
+    printf("%d\n", tokens[i].type);
   }
 
   return caculation(0, nr_token - 1, success);
