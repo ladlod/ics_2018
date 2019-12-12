@@ -37,10 +37,10 @@ static struct rule {
   {"&&", TK_AND, 2}, //与
   {"==", TK_EQ, 3},         //等于
   {"!=", TK_NEQ, 3},        //不等于
-  {"<", TK_L, 3}, //小于
-  {">", TK_G, 3}, //大于
   {"<=", TK_LE, 3}, //小于等于
   {">=", TK_GE, 3}, //大于等于
+  {"<", TK_L, 3}, //小于
+  {">", TK_G, 3}, //大于
   {"\\+", TK_PLUS, 4},  // 加号
   {"-", TK_SUB, 4}, //减号
   {"\\*", TK_MUL, 5}, //乘号
@@ -120,7 +120,7 @@ static bool make_token(char *e) {
 						nr_token++;
             break;
         }
-        position += substr_len;
+        //position += substr_len;
         break;
       }
     }
