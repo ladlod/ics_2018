@@ -27,16 +27,22 @@ char* rl_gets() {
   return line_read;
 }
 
-static int cmd_c(char *args) {
+static int cmd_c(char *args) { //continue
   cpu_exec(-1);
   return 0;
 }
 
-static int cmd_q(char *args) {
+static int cmd_q(char *args) { //quit
   return -1;
 }
 
-static int cmd_help(char *args);
+static int cmd_help(char *args); //help
+static int cmd_si(char *args); //single
+static int cmd_info(char *args); //info
+static int cmd_p(char *args); //caculation
+static int cmd_x(char *args); //scan memory
+static int cmd_w(char *args); //set watchpoint
+static int cmd_d(char *args); //delete watchpoiot
 
 static struct {
   char *name;
@@ -48,12 +54,17 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-
+  {"si", "Single step for n", cmd_si},
+  {"info", "Print the regsters or watchpoint", cmd_info},
+  {"p", "Caculation the expression", cmd_p},
+  {"x", "Scan the memory", cmd_x},
+  {"w", "Set a watchpoint", cmd_w},
+  {"d", "Delete a watchpoint", cmd_d}
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
 
-static int cmd_help(char *args) {
+static int cmd_help(char *args) { //help
   /* extract the first argument */
   char *arg = strtok(NULL, " ");
   int i;
@@ -75,6 +86,28 @@ static int cmd_help(char *args) {
   }
   return 0;
 }
+
+static int cmd_si(char *args){ //single
+  char *arg = strtok(NULL, " ");
+  if(arg == NULL){
+    cpu_exec(1);
+    return 0;
+  }
+  char *leftover;
+  unsigned long n = strtoul(arg, &leftover, 10);
+  if(leftover != NULL){
+    printf("Please input the right arguement!\n");
+  }else{
+    cpu_exec(n);
+  }
+
+  return 0;
+}
+static int cmd_info(char *args); //info
+static int cmd_p(char *args); //caculation
+static int cmd_x(char *args); //scan memory
+static int cmd_w(char *args); //set watchpoint
+static int cmd_d(char *args); //delete watchpoiot
 
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {
