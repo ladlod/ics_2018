@@ -103,11 +103,73 @@ static int cmd_si(char *args){ //single
 
   return 0;
 }
-static int cmd_info(char *args); //info
-static int cmd_p(char *args); //caculation
-static int cmd_x(char *args); //scan memory
-static int cmd_w(char *args); //set watchpoint
-static int cmd_d(char *args); //delete watchpoiot
+
+static void printRegster(int size, int index){
+  switch(size) {
+		case 1: printf("%s\t%#04X\t\t%d\n", reg_name(index, 1), reg_b(index), reg_b(index)); break;
+		case 2: printf("%s\t%#06X\t\t%d\n", reg_name(index, 2), reg_w(index), reg_w(index)); break;
+		case 4: printf("%s\t%#010X\t%d\n", reg_name(index, 4), reg_l(index), reg_l(index)); break;
+		case -1: printf("eip\t%#010X\t%d\n", cpu.eip, cpu.eip); break;
+    default: break;
+	}
+}
+
+static int cmd_info(char *args){ //info
+  if(args == NULL){
+    printf("Unknown type!\n");
+    return 0;
+  }
+  switch(*args){
+    case 'r':
+      for(int i = 0; i < 8; i++)
+        printRegster(4, i);
+      for(int i = 0; i < 8; i++)
+        printRegster(2, i);
+      for(int i = 0; i < 8; i++)
+        printRegster(1, i);
+      printRegster(-1, 0);
+      break;
+    case 'w':
+      printf("To be completed\n");
+      break;
+    default:
+      break;
+  }
+
+  return 0;
+}
+static int cmd_p(char *args){ //caculation
+  if(args == NULL){
+    printf("Nothing to caculate!\n");
+    return 0;
+  }
+  printf("To be completed!\n");
+  return 0;
+}
+static int cmd_x(char *args){ //scan memory
+  if(args == NULL){
+    printf("Nothing to Scan!\n");
+    return 0;
+  }
+  printf("To be completed!\n");
+  return 0;
+}
+static int cmd_w(char *args){
+  if(args == NULL){
+    printf("Nothing to set!\n");
+    return 0;
+  }
+  printf("To be completed!\n");
+  return 0;
+} //set watchpoint
+static int cmd_d(char *args){
+  if(args == NULL){
+    printf("Nothing to delete!\n");
+    return 0;
+  }
+  printf("To be completed!\n");
+  return 0;
+} //delete watchpoiot
 
 void ui_mainloop(int is_batch_mode) {
   if (is_batch_mode) {
