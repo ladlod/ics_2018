@@ -145,7 +145,13 @@ static int cmd_p(char *args){ //caculation
     printf("Nothing to caculate!\n");
     return 0;
   }
-  printf("To be completed!\n");
+  bool success = false;
+  uint32_t res = expr(args, &success);
+  if(!success)
+    printf("Caculate failed!\n");
+  else
+    printf("%lu\n", res);
+  
   return 0;
 }
 
