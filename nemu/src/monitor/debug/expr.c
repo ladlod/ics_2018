@@ -283,9 +283,9 @@ uint32_t expr(char *e, bool *success) {
       tokens[i].level = 6;
     }
   }
-  for(int i = 0; i < nr_token; i++){
+  /*for(int i = 0; i < nr_token; i++){
     printf("%d\n", tokens[i].type);
-  }
+  }*/
 
   return caculation(0, nr_token - 1, success);
 }
