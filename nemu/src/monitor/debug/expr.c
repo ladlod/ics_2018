@@ -276,7 +276,7 @@ uint32_t expr(char *e, bool *success) {
       tokens[i].type = TK_POINT;
       tokens[i].level = 6;
     }
-    if(tokens[i].type == TK_DIV && ((i == 0) || (tokens[i - 1].type != TK_NUMBER && tokens[i - 1].type != TK_HEX
+    if(tokens[i].type == TK_SUB && ((i == 0) || (tokens[i - 1].type != TK_NUMBER && tokens[i - 1].type != TK_HEX
       && tokens[i - 1].type != TK_RB))){ //负号
       tokens[i].type = TK_MINUS;
       tokens[i].level = 6;
