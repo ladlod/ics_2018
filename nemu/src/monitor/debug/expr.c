@@ -94,8 +94,8 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
-            //i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+            i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
@@ -231,7 +231,7 @@ uint32_t caculation(int left, int right, bool *success){
   }
   else{
     int op = findOperator(left, right);
-    //printf("op=%d\n", op);
+    printf("left=%d right=%d op=%d\n", left, right, op);
     if(op == left || tokens[op].type == TK_NOT || tokens[op].type == TK_POINT || tokens[op].type == TK_MINUS){
       uint32_t num = caculation(left + 1, right, success);
       switch (tokens[op].type)
@@ -250,7 +250,7 @@ uint32_t caculation(int left, int right, bool *success){
     }
     uint32_t num1 = caculation(left, op - 1, success);
     uint32_t num2 = caculation(op + 1, right, success);
-    //printf("num1=%d num2=%d\n", num1, num2);
+    printf("num1=%d num2=%d\n", num1, num2);
     switch (tokens[op].type)
     {
     case TK_EQ: //相等
@@ -312,6 +312,7 @@ uint32_t expr(char *e, bool *success) {
       tokens[i].level = 6;
     }
   }
+  //printf("%d\n", nr_token);
   /*for(int i = 0; i < nr_token; i++){
     printf("%d\n", tokens[i].type);
   }*/
