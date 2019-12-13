@@ -198,7 +198,7 @@ static int cmd_w(char *args){ //set watchpoint
     printf("Illigal expression to caculate!\n");
     return 0;
   }
-  new_wp(addr);
+  new_wp(addr, args);
   return 0;
 }
 

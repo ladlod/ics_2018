@@ -19,7 +19,7 @@ void init_wp_pool() { //初始化池
 }
 /* TODO: Implement the functionality of watchpoint */
 
-WP *new_wp(int64_t addr){
+WP *new_wp(int64_t v, char *args){
   if(!free_){
     printf("There is no place to set a watchpoint!\n");
     return NULL;
@@ -28,7 +28,8 @@ WP *new_wp(int64_t addr){
   free_ = free_ -> next;
   res -> next = head;
   head = res;
-  res->value = addr;
+  res->value = v;
+  strcpy(res->expression, args);
   return res;
 }
 void free_wp(int n){
@@ -70,9 +71,9 @@ void print_wp(){
     return ;
   }
   WP *p = head;
-  printf("NO\tValue\n");
+  printf("NO\tExpression\tValue\n");
   while(p){
-    printf("%-d\t%-ld\n", p->NO, p->value);
+    printf("%-d\t%s\t%-ld\n", p->NO, p->expression, p->value);
     p = p->next;
   }
 }
