@@ -87,7 +87,7 @@ static int cmd_help(char *args) { //help
   return 0;
 }
 
-static int cmd_si(char *args){ //single
+static int cmd_si(char *args){ //single step
   char *arg = strtok(NULL, " ");
   if(arg == NULL){
     cpu_exec(1);
@@ -133,6 +133,7 @@ static int cmd_info(char *args){ //print info
       printf("To be completed\n");
       break;
     default:
+      printf("Unknown type!\n");
       break;
   }
 

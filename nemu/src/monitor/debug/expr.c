@@ -136,7 +136,7 @@ static bool make_token(char *e) {
 
 bool checkParentheses(int l, int r){
   if(tokens[l].type == TK_LB && tokens[r].type == TK_RB){
-    int n = 0; //记录除初始括号外单独的左括号数目，每次配对减一，小于0的时候返回false
+    int n = 0; //记录除初始括号外单独的左括号数目，每次配对减一，小于0的时候返回false，以此来保证括号起始位置和结束位置配对
     for(int i = l + 1; i < r; i++){
       if(tokens[i].type == TK_LB) n++;
       else if(tokens[i].type == TK_RB) n--;
@@ -161,7 +161,7 @@ int findOperator(int left, int right){
       n++;
     else if(tokens[i].type == TK_RB)
       n--;
-    if(n != 0)
+    if(n != 0) //括号未结束
       continue;
     if(tokens[i].level < min_level){
       min_level = tokens[i].level;
@@ -247,7 +247,7 @@ uint32_t caculation(int left, int right, bool *success){
       return num1 * num2;
     case TK_DIV: //除
       if(num2 == 0){
-        printf("Illegal divisor shouldn't be 0!\n");
+        printf("Illegal divisor shouldn't be 0!\n"); //除数不能为0
         *success = false;
         return -1;
       }
@@ -266,7 +266,6 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
-
 
   *success = true;
   /* TODO: Insert codes to evaluate the expression. */
