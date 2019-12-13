@@ -115,8 +115,8 @@ static bool make_token(char *e) {
           default: 
             tokens[nr_token].type = rules[i].token_type;
             tokens[nr_token].level = rules[i].level;
-            strncpy (tokens[nr_token].str, substr_start, substr_len-1);
-						tokens[nr_token].str[substr_len]='\0';
+            strncpy (tokens[nr_token].str, substr_start, substr_len);
+						tokens[nr_token].str[substr_len + 1]='\0';
 						nr_token++;
             break;
         }
@@ -183,9 +183,12 @@ uint32_t caculation(int left, int right, bool *success){
     switch (tokens[left].type)
     {
     case TK_NUMBER:
-      return atoi(tokens[left].str);
+      num = atoi(tokens[left].str);
+      //printf("%s %d\n", tokens[left].str, num);
+      return num;
     case TK_HEX:
       sscanf(tokens[left].str, "%x", &num);
+      //printf("%s %d\n", tokens[left].str, num);
       return num;
     default:
       success = false;
@@ -198,7 +201,7 @@ uint32_t caculation(int left, int right, bool *success){
   }
   else{
     int op = findOperator(left, right);
-    printf("op=%d\n", op);
+    //printf("op=%d\n", op);
     if(op == left || tokens[op].type == TK_NOT || tokens[op].type == TK_POINT || tokens[op].type == TK_MINUS){
       uint32_t num = caculation(left + 1, right, success);
       switch (tokens[op].type)
@@ -217,6 +220,7 @@ uint32_t caculation(int left, int right, bool *success){
     }
     uint32_t num1 = caculation(left, op - 1, success);
     uint32_t num2 = caculation(op + 1, right, success);
+    //printf("num1=%d num2=%d\n", num1, num2);
     switch (tokens[op].type)
     {
     case TK_EQ: //相等
