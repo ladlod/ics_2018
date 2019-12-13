@@ -36,11 +36,11 @@ static int cmd_q(char *args) { //quit
   return -1;
 }
 
-static int cmd_help(char *args); //help
-static int cmd_si(char *args); //single
-static int cmd_info(char *args); //info
-static int cmd_p(char *args); //caculation
-static int cmd_x(char *args); //scan memory
+static int cmd_help(char *args); //help completed
+static int cmd_si(char *args); //single completed
+static int cmd_info(char *args); //info 
+static int cmd_p(char *args); //caculation completed
+static int cmd_x(char *args); //scan memory completed
 static int cmd_w(char *args); //set watchpoint
 static int cmd_d(char *args); //delete watchpoiot
 
@@ -130,7 +130,7 @@ static int cmd_info(char *args){ //print info
       printRegster(-1, 0);
       break;
     case 'w':
-      printf("To be completed\n");
+      print_wp();
       break;
     default:
       printf("Unknown type!\n");
@@ -192,7 +192,13 @@ static int cmd_w(char *args){ //set watchpoint
     printf("Nothing to set!\n");
     return 0;
   }
-  printf("To be completed!\n");
+  bool success = true;
+  int64_t addr = expr(args, &success);
+  if(!success){
+    printf("Illigal expression to caculate!\n");
+    return 0;
+  }
+  new_wp(addr);
   return 0;
 }
 
@@ -202,7 +208,8 @@ static int cmd_d(char *args){ //delete watchpoiot
     printf("Nothing to delete!\n");
     return 0;
   }
-  printf("To be completed!\n");
+  int n = atoi(args);
+  free_wp(n);
   return 0;
 } 
 
