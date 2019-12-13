@@ -183,15 +183,14 @@ uint32_t caculation(int left, int right, bool *success){
     switch (tokens[left].type)
     {
     case TK_NUMBER:
-      num = atoi(tokens[left].str);
-      break;
+      return atoi(tokens[left].str);
     case TK_HEX:
       sscanf(tokens[left].str, "%x", &num);
-      break;
+      return num;
     default:
       success = false;
       printf("Unkown type!\n");
-      break;
+      return -1;
     }
   }
   else if(checkParentheses(left, right)){
@@ -199,6 +198,7 @@ uint32_t caculation(int left, int right, bool *success){
   }
   else{
     int op = findOperator(left, right);
+    printf("op=%d\n", op);
     if(op == left || tokens[op].type == TK_NOT || tokens[op].type == TK_POINT || tokens[op].type == TK_MINUS){
       uint32_t num = caculation(left + 1, right, success);
       switch (tokens[op].type)
