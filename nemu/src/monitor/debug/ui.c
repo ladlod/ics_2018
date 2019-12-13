@@ -106,10 +106,10 @@ static int cmd_si(char *args){ //single step
 
 static void printRegster(int size, int index){
   switch(size) {
-		case 1: printf("%s\t%#04X\t\t%d\n", reg_name(index, 1), reg_b(index), reg_b(index)); break;
-		case 2: printf("%s\t%#06X\t\t%d\n", reg_name(index, 2), reg_w(index), reg_w(index)); break;
-		case 4: printf("%s\t%#010X\t%d\n", reg_name(index, 4), reg_l(index), reg_l(index)); break;
-		case -1: printf("eip\t%#010X\t%d\n", cpu.eip, cpu.eip); break;
+		case 1: printf("%s\t%#04X\n", reg_name(index, 1), reg_b(index)); break;
+		case 2: printf("%s\t%#06X\n", reg_name(index, 2), reg_w(index)); break;
+		case 4: printf("%s\t%#010X\n", reg_name(index, 4), reg_l(index)); break;
+		case -1: printf("eip\t%#010X\n", cpu.eip); break;
     default: break;
 	}
 }
