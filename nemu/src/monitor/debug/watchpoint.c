@@ -72,7 +72,7 @@ void print_wp(){
   WP *p = head;
   printf("NO\tValue\n");
   while(p){
-    printf("%-d\t%-d\n", p->NO, p->value);
+    printf("%-d\t%-ld\n", p->NO, p->value);
     p = p->next;
   }
 }
