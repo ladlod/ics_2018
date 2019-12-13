@@ -130,7 +130,7 @@ static int cmd_info(char *args){ //print info
       printRegster(-1, 0);
       break;
     case 'w':
-      print_wp();
+      print_wp(); //打印观测点信息
       break;
     default:
       printf("Unknown type!\n");
