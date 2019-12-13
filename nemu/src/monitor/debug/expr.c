@@ -14,7 +14,7 @@ enum {
   TK_MUL, TK_DIV, TK_NOT, TK_LB, TK_RB,
 //乘 268,除 269,取反 270,左括号 271,右括号 272
   TK_POINT, TK_NUMBER, TK_HEX, TK_REGISTER
-//指针 273,数字 274,十六进制 275
+//指针 273,数字 274,十六进制 275, 寄存器276
 /* TODO: Add more token types */
 };
 
@@ -94,8 +94,8 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
-            i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+          //  i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
@@ -231,7 +231,7 @@ uint32_t caculation(int left, int right, bool *success){
   }
   else{
     int op = findOperator(left, right);
-    printf("left=%d right=%d op=%d\n", left, right, op);
+    //printf("left=%d right=%d op=%d\n", left, right, op);
     if(op == left || tokens[op].type == TK_NOT || tokens[op].type == TK_POINT || tokens[op].type == TK_MINUS){
       uint32_t num = caculation(left + 1, right, success);
       switch (tokens[op].type)
@@ -250,7 +250,7 @@ uint32_t caculation(int left, int right, bool *success){
     }
     uint32_t num1 = caculation(left, op - 1, success);
     uint32_t num2 = caculation(op + 1, right, success);
-    printf("num1=%d num2=%d\n", num1, num2);
+    //printf("num1=%d num2=%d\n", num1, num2);
     switch (tokens[op].type)
     {
     case TK_EQ: //相等
@@ -307,7 +307,7 @@ uint32_t expr(char *e, bool *success) {
       tokens[i].level = 6;
     }
     if(tokens[i].type == TK_SUB && ((i == 0) || (tokens[i - 1].type != TK_NUMBER && tokens[i - 1].type != TK_HEX
-      && tokens[i - 1].type != TK_RB && tokens[i].type != TK_REGISTER))){ //负号
+      && tokens[i - 1].type != TK_RB && tokens[i - 1].type != TK_REGISTER))){ //负号
       tokens[i].type = TK_MINUS;
       tokens[i].level = 6;
     }
