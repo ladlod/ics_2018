@@ -71,7 +71,6 @@ void print_wp(){
     return ;
   }
   WP *p = head;
-  printf("NO\tExpression\tValue\n");
   while(p){
     printf("%-d\t%s\t%-ld\n", p->NO, p->expression, p->value);
     p = p->next;
