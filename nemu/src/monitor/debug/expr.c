@@ -13,7 +13,7 @@ enum {
 //等于 257,不等于 258,与 259,或 260,减 261,加 262,负数 263,大于 264,小于 265,大于等于 266,小于等于 267
   TK_MUL, TK_DIV, TK_NOT, TK_LB, TK_RB,
 //乘 268,除 269,取反 270,左括号 271,右括号 272
-  TK_POINT, TK_NUMBER, TK_HEX
+  TK_POINT, TK_NUMBER, TK_HEX, TK_REGISTER
 //指针 273,数字 274,十六进制 275
 /* TODO: Add more token types */
 };
@@ -31,7 +31,7 @@ static struct rule {
   {" +", TK_NOTYPE, 0},    //空格
   {"\\b[0-9]+\\b", TK_NUMBER, 0}, //数字
   {"\\b0[xX][0-9a-fA-F]+\\b", TK_HEX, 0}, //十六进制
-  //{"\\$(eax|EAX|ebx|EBX|ecx|ECX|edx|EDX|ebp|EBP|esp|ESP|esi|ESI|edi|EDI|eip|EIP|([ABCD][HLX])|([abcd][hlx]))", TK_REGISTER, 0}, //寄存器
+  {"\\$(eax|EAX|ebx|EBX|ecx|ECX|edx|EDX|ebp|EBP|esp|ESP|esi|ESI|edi|EDI|eip|EIP|([ABCD][HLX])|([abcd][hlx]))", TK_REGISTER, 0}, //寄存器
   {"\\t+", TK_NOTYPE, 0},  //tab
   {"\\|\\|", TK_OR, 1}, //或
   {"&&", TK_AND, 2}, //与
@@ -94,8 +94,8 @@ static bool make_token(char *e) {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
 
-        //Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
-            //i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
+            i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
 
         /* TODO: Now a new token is recognized with rules[i]. Add codes
@@ -105,13 +105,13 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
           case TK_NOTYPE: break;
-          /*case TK_REGISTER: 
+          case TK_REGISTER: 
             tokens[nr_token].type = rules[i].token_type;
             tokens[nr_token].level = rules[i].level;
-            strncpy (tokens[nr_token].str, substr_start + 1, substr_len-1);
-						tokens[nr_token].str[substr_len-1]='\0';
+            strncpy (tokens[nr_token].str, substr_start + 1, substr_len - 1);
+						tokens[nr_token].str[substr_len]='\0';
 						nr_token++;
-            break;*/
+            break;
           default: 
             tokens[nr_token].type = rules[i].token_type;
             tokens[nr_token].level = rules[i].level;
@@ -120,7 +120,6 @@ static bool make_token(char *e) {
 						nr_token++;
             break;
         }
-        //position += substr_len;
         break;
       }
     }
@@ -155,7 +154,7 @@ int findOperator(int left, int right){
   int op = left;
   int n = 0;
   for(int i = left; i <= right; i++){
-    if(tokens[i].type == TK_NUMBER || tokens[i].type == TK_HEX)
+    if(tokens[i].type == TK_NUMBER || tokens[i].type == TK_HEX || tokens[i].type == TK_REGISTER)
       continue;
     else if(tokens[i].type == TK_LB)
       n++;
@@ -190,6 +189,37 @@ uint32_t caculation(int left, int right, bool *success){
       sscanf(tokens[left].str, "%x", &num);
       //printf("%s %d\n", tokens[left].str, num);
       return num;
+    case TK_REGISTER:
+      if(strlen(tokens[left].str) == 3){ //64位寄存器
+        if(strcmp(tokens[left].str, "eip") == 0 || strcmp(tokens[left].str, "EIP") == 0){
+          num = cpu.eip;
+          return num;
+        }
+        for(int i = R_EAX; i <= R_EDI; i++){
+          if(strcmp(tokens[left].str, regsl[i]) == 0){
+            num = reg_l(i);
+            return num;
+          }
+        }
+      }
+      else{
+        if(tokens[left].str[1] == 'x' || tokens[left].str[1] == 'p' || tokens[left].str[1] == 'i'){ //32位寄存器
+          for(int i = R_AX; i <= R_DI; i++){
+            if(strcmp(tokens[left].str, regsw[i]) == 0){
+            num = reg_w(i);
+            return num;
+            }
+          }
+        }
+        else{ //16位寄存器
+          for(int i = R_AL; i <= R_BH; i++){
+            if(strcmp(tokens[left].str, regsb[i]) == 0){
+            num = reg_b(i);
+            return num;
+            }
+          }
+        }
+      }
     default:
       success = false;
       printf("Unkown type!\n");
@@ -272,12 +302,12 @@ uint32_t expr(char *e, bool *success) {
   //处理指针和负号
   for(int i = 0; i < nr_token; i++){
     if(tokens[i].type == TK_MUL && ((i == 0) || (tokens[i - 1].type != TK_NUMBER && tokens[i - 1].type != TK_HEX
-      && tokens[i - 1].type != TK_RB))){ //指针
+      && tokens[i - 1].type != TK_RB && tokens[i - 1].type != TK_REGISTER))){ //指针
       tokens[i].type = TK_POINT;
       tokens[i].level = 6;
     }
     if(tokens[i].type == TK_SUB && ((i == 0) || (tokens[i - 1].type != TK_NUMBER && tokens[i - 1].type != TK_HEX
-      && tokens[i - 1].type != TK_RB))){ //负号
+      && tokens[i - 1].type != TK_RB && tokens[i].type != TK_REGISTER))){ //负号
       tokens[i].type = TK_MINUS;
       tokens[i].level = 6;
     }
