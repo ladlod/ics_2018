@@ -15,13 +15,26 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
   // dest <- ( cc is satisfied ? 1 : 0)
   switch (subcode & 0xe) {
     case CC_O:
+      *dest = cpu.EFLAGS.OF;
+      break;
     case CC_B:
+      *dest = cpu.EFLAGS.CF;
+      break;
     case CC_E:
+      *dest = cpu.EFLAGS.ZF;
+      break;
     case CC_BE:
+      *dest = cpu.EFLAGS.CF || cpu.EFLAGS.ZF;
+      break;
     case CC_S:
+      *dest = cpu.EFLAGS.SF;
+      break;
     case CC_L:
+      *dest = cpu.EFLAGS.SF != cpu.EFLAGS.OF;
+      break;
     case CC_LE:
-      TODO();
+      *dest = ((cpu.EFLAGS.ZF) || (cpu.EFLAGS.SF != cpu.EFLAGS.OF));
+      break;
     default: panic("should not reach here");
     case CC_P: panic("n86 does not have PF");
   }
