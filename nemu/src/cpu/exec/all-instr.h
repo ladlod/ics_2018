@@ -12,6 +12,7 @@ make_EHelper(call);
 make_EHelper(ret);
 //data-move.c
 make_EHelper(push);
+make_EHelper(lea);
 //arith.c
 make_EHelper(sub);
 //logic.c
