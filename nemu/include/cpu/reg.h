@@ -44,7 +44,7 @@ union{
   vaddr_t eip;
 
   union{
-    struct{
+    struct {
       uint8_t CF; //进位标志位
       uint8_t ZF; //零标志位
       uint8_t SF; //符号标志位
