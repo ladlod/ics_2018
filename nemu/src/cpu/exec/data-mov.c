@@ -1,14 +1,14 @@
 #include "cpu/exec.h"
 
 make_EHelper(mov) {
-  printf("move %d\n", id_src->val);
+  //printf("move: 0x%x\n", id_src->val);
   operand_write(id_dest, &id_src->val);
   print_asm_template2(mov);
 }
 
 make_EHelper(push) {
   //TODO();
-  printf("push 0x%x, width=%d\n", id_dest->val, id_dest->width);
+  //printf("push: 0x%x, width=%d\n", id_dest->val, id_dest->width);
   if(id_dest->width == 1){
     uint8_t utmp = id_dest->val;
     int8_t tmp = utmp;
@@ -92,6 +92,7 @@ make_EHelper(movzx) {
 }
 
 make_EHelper(lea) {
+  //printf("lea: 0x%x\n", id_src->addr);
   operand_write(id_dest, &id_src->addr);
   print_asm_template2(lea);
 }
