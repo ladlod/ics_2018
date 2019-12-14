@@ -1,17 +1,29 @@
 #include "cpu/exec.h"
 
+/*    CF; //进位标志位
+      ZF; //零标志位
+      SF; //符号标志位
+      IF; //中断允许标志位
+      OF; //溢出标志位
+      */
+
 make_EHelper(add) {
   TODO();
 
   print_asm_template2(add);
 }
 
-make_EHelper(sub) {
+make_EHelper(sub) { //dest=dest-src, src为有符号数
   //TODO();
-  rtl_sext(&t1, &id_dest->val, id_dest->width);
-  rtl_sext(&t2, &id_src->val, id_src->width);
-  rtl_sub(&t0, &t1, &t2);
-  //t3 = t0;
+  rtl_sext(&t1, &id_dest->val, id_dest->width);  //t1=dest
+  rtl_sext(&t2, &id_src->val, id_src->width);  //t2=src
+  rtl_sub(&t0, &t1, &t2); //t0=t1-t2
+  t3 = t2 > t1;
+  rtl_set_CF(&t3);  //减数大于被减数时”进位“ 
+  t3 = (((int32_t)t1 < 0) && ((int32_t) t2 > 0) && ((int32_t) t0 > 0)) || //负数减正数得负数
+        (((int32_t) t1 > 0) && ((int32_t) t2 < 0) && ((int32_t) t0 < 0)); //正数减负数得正数
+  rtl_set_OF(&t3);
+  rtl_update_ZFSF(&t0, 4);
 
   operand_write(id_dest, &t0);
 

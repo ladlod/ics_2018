@@ -24,6 +24,11 @@ make_EHelper(push) {
   print_asm_template1(push);
 }
 
+/*make_EHelper(pushl){
+  printf("pushl");
+  print_asm_template1(pushl);
+}*/
+
 make_EHelper(pop) {
   //TODO();
   rtl_pop(&t0);
