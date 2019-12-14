@@ -46,16 +46,16 @@ make_EHelper(sub) { //dest=dest-src, src为有符号数
 
 make_EHelper(cmp) {
   //TODO();
-  rtl_sub(&t0, &id_src->val, &id_src2->val);
-  rtl_update_ZFSF(&t0, 4);
+  rtl_sub(&at, &id_src->val, &id_src2->val);
+  rtl_update_ZFSF(&at, 4);
 
   print_asm_template2(cmp);
 }
 
 make_EHelper(inc) {
   //TODO();
-  rtl_addi(&t1, &id_dest->val, 1);
-  operand_write(id_dest, &t1);
+  rtl_addi(&at, &id_dest->val, 1);
+  operand_write(id_dest, &at);
 
   print_asm_template1(inc);
 }

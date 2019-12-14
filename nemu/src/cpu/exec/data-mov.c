@@ -31,8 +31,8 @@ make_EHelper(push) {
 
 make_EHelper(pop) {
   //TODO();
-  rtl_pop(&t0);
-  id_dest->val = t0;
+  rtl_pop(&at);
+  id_dest->val = at;
   operand_write(id_dest, &id_dest->val);
 
   print_asm_template1(pop);
@@ -52,8 +52,8 @@ make_EHelper(popa) {
 
 make_EHelper(leave) {
   reg_l(4) = reg_l(5);
-  rtl_pop(&t1);
-  reg_w(5) = t1;
+  rtl_pop(&at);
+  reg_w(5) = at;
 
   print_asm("leave");
 }
