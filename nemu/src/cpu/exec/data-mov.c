@@ -13,7 +13,10 @@ make_EHelper(push) {
 }
 
 make_EHelper(pop) {
-  TODO();
+  //TODO();
+  rtl_pop(&t0);
+  id_dest->val = t0;
+  operand_write(id_dest, &id_dest->val);
 
   print_asm_template1(pop);
 }

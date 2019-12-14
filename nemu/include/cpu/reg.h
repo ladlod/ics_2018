@@ -43,6 +43,17 @@ union{
 
   vaddr_t eip;
 
+  union{
+    struct{
+      uint8_t CF; //进位标志位
+      uint8_t ZF; //零标志位
+      uint8_t SF; //符号标志位
+      uint8_t IF; //中断允许标志位
+      uint8_t OF; //溢出标志位
+    } EFLAGS;
+    uint32_t falgs;
+  };
+
 } CPU_state;
 
 extern CPU_state cpu;

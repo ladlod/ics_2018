@@ -154,12 +154,26 @@ static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) { //取反
   *dest = ~(*src1);
 }
 
-static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) { //
+static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) { // 变量赋值
   // dest <- signext(src1[(width * 8 - 1) .. 0])
-  TODO();
+  //TODO();
+  switch (width)
+  {
+  case 4:
+    *dest = *src1;
+    break;
+  case 2:
+    *dest = (int16_t)*src1;
+    break;
+  case 1:
+    *dest = (int8_t)*src1;
+    break; 
+  default:
+    break;
+  }
 }
 
-static inline void rtl_push(const rtlreg_t* src1) { //入栈
+static inline void rtl_push(const rtlreg_t* src1) { //源操作数入栈
   // esp <- esp - 4
   // M[esp] <- src1
   cpu.esp -= 4;
@@ -176,7 +190,7 @@ static inline void rtl_pop(rtlreg_t* dest) { //出栈
 }
 
 static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest, //条件判断选择源操作数或立即数
-    const rtlreg_t *src1, int imm) {
+  const rtlreg_t *src1, int imm) {
   // dest <- (src1 relop imm ? 1 : 0)
   // TODO();
   *dest = interpret_relop(relop, *src1, imm);
@@ -202,12 +216,16 @@ make_rtl_setget_eflags(SF)
 
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
-  TODO();
+  //TODO();
+  static uint32_t flags_zf_masks[] = {0, 0xff, 0xffff, 0, 0xfffffff};
+  cpu.EFLAGS.ZF = ((*result) & flags_zf_masks[width]) == 0;
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   // eflags.SF <- is_sign(result[width * 8 - 1 .. 0])
-  TODO();
+  //TODO();
+  static uint32_t flags_sf_masks[] = {0, 0x80, 0x8000, 0, 0x80000000};
+  cpu.EFLAGS.SF = ((*result) & flags_sf_masks[width]) != 0;
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
