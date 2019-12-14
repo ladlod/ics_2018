@@ -17,3 +17,4 @@ make_EHelper(lea);
 make_EHelper(sub);
 //logic.c
 make_EHelper(xor);
+make_EHelper(and);
