@@ -7,6 +7,17 @@ make_EHelper(mov) {
 
 make_EHelper(push) {
   //TODO();
+  printf("push %d, width=%d\n", id_dest->val, id_dest->width);
+  if(id_dest->width == 1){
+    uint8_t utmp = id_dest->val;
+    int8_t tmp = utmp;
+    id_dest->val = tmp;
+  }
+  else if(id_dest->width == 2){
+    uint16_t tmp = id_dest->val;
+    int16_t tmp1 = tmp;
+    id_dest->val = tmp1;
+  }
   rtl_push(&id_dest->val);
 
   print_asm_template1(push);

@@ -111,4 +111,5 @@ void read_ModR_M(vaddr_t *eip, Operand *rm, bool load_rm_val, Operand *reg, bool
       rtl_lm(&rm->val, &rm->addr, rm->width);
     }
   }
+
 }
