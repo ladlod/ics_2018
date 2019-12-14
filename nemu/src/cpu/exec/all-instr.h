@@ -22,5 +22,6 @@ make_EHelper(adc);
 make_EHelper(xor);
 make_EHelper(and);
 make_EHelper(or);
+make_EHelper(setcc);
 //special.c
 make_EHelper(nop);
