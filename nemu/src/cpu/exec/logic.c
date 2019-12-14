@@ -11,7 +11,6 @@ make_EHelper(and) {
   rtl_and(&t1, &id_dest->val, &id_src->val);
   //printf("and: 0x%x=0x%x&&0x%x\n", t1, id_dest->val, id_src->val);
   operand_write(id_dest, &t1);
-  //printf("and\n");
 
   print_asm_template2(and);
 }
@@ -24,7 +23,8 @@ make_EHelper(xor) {
 }
 
 make_EHelper(or) {
-  TODO();
+  rtl_or(&t1, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &t1);
 
   print_asm_template2(or);
 }

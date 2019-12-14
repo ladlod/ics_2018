@@ -21,5 +21,6 @@ make_EHelper(adc);
 //logic.c
 make_EHelper(xor);
 make_EHelper(and);
+make_EHelper(or);
 //special.c
 make_EHelper(nop);

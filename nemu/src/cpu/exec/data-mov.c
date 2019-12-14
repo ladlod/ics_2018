@@ -15,9 +15,9 @@ make_EHelper(push) {
     id_dest->val = tmp;
   }
   else if(id_dest->width == 2){
-    uint16_t tmp = id_dest->val;
-    int16_t tmp1 = tmp;
-    id_dest->val = tmp1;
+    uint16_t utmp = id_dest->val;
+    int16_t tmp = utmp;
+    id_dest->val = tmp;
   }
   rtl_push(&id_dest->val);
 
