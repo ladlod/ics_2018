@@ -51,7 +51,9 @@ make_EHelper(popa) {
 }
 
 make_EHelper(leave) {
-  TODO();
+  reg_l(4) = reg_l(5);
+  rtl_pop(&t1);
+  reg_w(5) = t1;
 
   print_asm("leave");
 }
