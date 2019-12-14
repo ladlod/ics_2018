@@ -45,7 +45,9 @@ make_EHelper(sub) { //dest=dest-src, src为有符号数
 }
 
 make_EHelper(cmp) {
-  TODO();
+  //TODO();
+  rtl_sub(&t0, &id_src->val, &id_src2->val);
+  rtl_update_ZFSF(&t0, 4);
 
   print_asm_template2(cmp);
 }
