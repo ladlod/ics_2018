@@ -56,7 +56,7 @@ make_EHelper(cmp) {
   rtl_update_ZFSF(&t0, 4);
   //printf("SF=%d\n", cpu.EFLAGS.SF);
   t3 = t0 > t1;
-  rtl_set_CF(&t3);  //差大于被减数时发生”进位“ 
+  rtl_set_CF(&t3);  //无符号数差大于被减数时发生”进位“ 
   //t3 = ((((int32_t)(t1) < 0) == (((int32_t)(t2) >> 31) == 0)) && (((int32_t)(t0) < 0) != ((int32_t)(t1) < 0)));
   t3 = (((int32_t)t1 < 0) && ((int32_t) t2 > 0) && ((int32_t) t0 > 0)) || //负数减正数得负数
         (((int32_t) t1 > 0) && ((int32_t) t2 < 0) && ((int32_t) t0 < 0)); //正数减负数得正数
