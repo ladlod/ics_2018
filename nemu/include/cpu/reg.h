@@ -45,11 +45,11 @@ union{
 
   union{
     struct {
-      uint8_t CF; //进位标志位
-      uint8_t ZF; //零标志位
-      uint8_t SF; //符号标志位
-      uint8_t IF; //中断允许标志位
-      uint8_t OF; //溢出标志位
+      uint8_t CF : 1; //进位标志位
+      uint8_t ZF : 1; //零标志位
+      uint8_t SF : 1; //符号标志位
+      uint8_t IF : 1; //中断允许标志位
+      uint8_t OF : 1; //溢出标志位
     } EFLAGS;
     uint32_t falgs;
   };

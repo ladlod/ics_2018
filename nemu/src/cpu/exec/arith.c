@@ -46,7 +46,9 @@ make_EHelper(sub) { //dest=dest-src, src为有符号数
 
 make_EHelper(cmp) {
   //TODO();
-  rtl_sub(&t0, &id_dest->val, &id_src->val);
+  rtl_sext(&t1, &id_dest->val, id_dest->width);
+	rtl_sext(&t2, &id_src->val, id_src->width);
+  rtl_sub(&t0, &t1, &t2);
   printf("dest:%d src:%d\n", id_dest->val, id_src->val);
   rtl_update_ZFSF(&t0, 4);
 
