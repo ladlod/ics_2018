@@ -19,6 +19,7 @@ make_EHelper(push) {
     int16_t tmp = id_dest->val;
     id_dest->val = tmp;
   }
+  //printf("push 0x%x\n", id_dest->val);
   rtl_push(&id_dest->val);
 
   print_asm_template1(push);
@@ -33,6 +34,7 @@ make_EHelper(pop) {
   //TODO();
   rtl_pop(&t0);
   operand_write(id_dest, &t0);
+  //printf("pop 0x%x\n", t0);
 
   print_asm_template1(pop);
 }
@@ -93,7 +95,7 @@ make_EHelper(movzx) {
 }
 
 make_EHelper(lea) { 
-  printf("lea 0x%x\n", id_src->addr);
+  //printf("lea 0x%x\n", id_src->addr);
   operand_write(id_dest, &id_src->addr);
   //printf("addr:%d id_dest:%d id_reg=%d\n",id_src->addr, reg_l(id_dest->reg), id_dest->reg);
   print_asm_template2(lea);
