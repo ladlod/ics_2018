@@ -1,7 +1,6 @@
 #include "cpu/exec.h"
 
 make_EHelper(mov) {
-  //printf("move: 0x%x\n", id_src->val);
   operand_write(id_dest, &id_src->val);
   //printf("id_src:%d id_dest:%d id_reg=%d\n",id_src->val, id_dest->val, id_dest->reg);
   //reg_l(id_dest->reg) = id_src->val; 
@@ -96,14 +95,7 @@ make_EHelper(movzx) {
   print_asm_template2(movzx);
 }
 
-make_EHelper(lea) {
-  //printf("val: 0x%x , 0x%x\n", id_src->val, id_dest->val);
-  //printf("addr: 0x%x , 0x%x\n", id_src->addr, id_dest->addr);
-  //cpu.ecx = id_src->addr;
-  //printf("&cpu.ecx==0x%x\n", cpu.ecx);
-  //printf("type=%d reg=%d width=%d\n", id_dest->type, id_dest->reg, id_dest->width);
-  //id_dest->val = id_src->addr;
-  //reg_l(id_dest->reg) = id_src->addr; 
+make_EHelper(lea) { 
   operand_write(id_dest, &id_src->addr);
   //printf("addr:%d id_dest:%d id_reg=%d\n",id_src->addr, reg_l(id_dest->reg), id_dest->reg);
   print_asm_template2(lea);
