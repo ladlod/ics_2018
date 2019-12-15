@@ -12,6 +12,7 @@ make_EHelper(add) {
   rtl_sext(&t1, &id_dest->val, id_dest->width);  //t1=dest
   rtl_sext(&t2, &id_src->val, id_src->width);  //t2=src
   rtl_add(&t0, &t1, &t2);
+  //printf("0x%x + 0x%x = 0x%x\n", t1, t2, t0);
 
   t3 = t0 < t1 || t0 < t2; //对于无符号数，和小于加数之一则有进位
   rtl_set_CF(&t3);
@@ -22,6 +23,7 @@ make_EHelper(add) {
 
   rtl_update_ZFSF(&t0, 4);
   operand_write(id_dest, &t0);
+  //printf("width = %d id_dest= 0x%x\n", id_dest->width, reg_l(id_dest->reg));
 
   print_asm_template2(add);
 }
@@ -49,7 +51,7 @@ make_EHelper(cmp) {
   rtl_sext(&t1, &id_dest->val, id_dest->width);
 	rtl_sext(&t2, &id_src->val, id_src->width);
   rtl_sub(&t0, &t1, &t2);
-  printf("dest:%d src:%d\n", id_dest->val, id_src->val);
+  //printf("dest:%d src:%d\n", id_dest->val, id_src->val);
   rtl_update_ZFSF(&t0, 4);
 
   print_asm_template2(cmp);
