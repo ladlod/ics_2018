@@ -1,6 +1,6 @@
 #include "nemu.h"
 
-#define PMEM_SIZE (1024 * 1024 * 1024)
+#define PMEM_SIZE (128 * 1024 * 1024)
 
 #define pmem_rw(addr, type) *(type *)({\
     Assert(addr < PMEM_SIZE, "physical address(0x%08x) is out of bound", addr); \
@@ -13,7 +13,7 @@ uint8_t pmem[PMEM_SIZE];
 
 uint32_t paddr_read(paddr_t addr, int len) {
   //is_mmio()
-  //printf("0x%x\n", addr);
+  printf("0x%x\n", addr);
   return pmem_rw(addr, uint32_t) & (~0u >> ((4 - len) << 3));
 }
 
