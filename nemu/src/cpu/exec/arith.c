@@ -51,6 +51,11 @@ make_EHelper(cmp) {
   rtl_sext(&t1, &id_dest->val, id_dest->width);
 	rtl_sext(&t2, &id_src->val, id_src->width);
   rtl_sub(&t0, &t1, &t2);
+  t3 = t2 > t1;
+  rtl_set_CF(&t3);  //减数大于被减数时”进位“ 
+  t3 = (((int32_t)t1 < 0) && ((int32_t) t2 > 0) && ((int32_t) t0 > 0)) || //负数减正数得负数
+        (((int32_t) t1 > 0) && ((int32_t) t2 < 0) && ((int32_t) t0 < 0)); //正数减负数得正数
+  rtl_set_OF(&t3);
   //printf("dest:%d src:%d\n", id_dest->val, id_src->val);
   rtl_update_ZFSF(&t0, 4);
 
