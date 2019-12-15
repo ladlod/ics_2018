@@ -17,6 +17,7 @@ make_EHelper(lea);
 make_EHelper(movzx);
 make_EHelper(leave);
 make_EHelper(pop);
+make_EHelper(cltd);
 //make_EHelper(pushl);
 //arith.c
 make_EHelper(sub);
@@ -25,6 +26,8 @@ make_EHelper(adc);
 make_EHelper(inc);
 make_EHelper(cmp);
 make_EHelper(dec);
+make_EHelper(imul2);
+make_EHelper(idiv);
 //logic.c
 make_EHelper(xor);
 make_EHelper(and);
