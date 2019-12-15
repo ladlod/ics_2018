@@ -11,6 +11,7 @@ make_EHelper(nemu_trap);
 make_EHelper(call);
 make_EHelper(ret);
 make_EHelper(jcc);
+make_EHelper(jmp);
 //data-move.c
 make_EHelper(push);
 make_EHelper(lea);
