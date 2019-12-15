@@ -12,6 +12,8 @@ make_EHelper(call);
 make_EHelper(ret);
 make_EHelper(jcc);
 make_EHelper(jmp);
+make_EHelper(call_rm);
+make_EHelper(jmp_rm);
 //data-move.c
 make_EHelper(push);
 make_EHelper(lea);
@@ -19,6 +21,7 @@ make_EHelper(movzx);
 make_EHelper(leave);
 make_EHelper(pop);
 make_EHelper(cltd);
+make_EHelper(movsx);
 //make_EHelper(pushl);
 //arith.c
 make_EHelper(sub);
@@ -30,6 +33,8 @@ make_EHelper(dec);
 make_EHelper(imul2);
 make_EHelper(idiv);
 make_EHelper(sbb);
+make_EHelper(mul);
+make_EHelper(imul1);
 //logic.c
 make_EHelper(xor);
 make_EHelper(and);
