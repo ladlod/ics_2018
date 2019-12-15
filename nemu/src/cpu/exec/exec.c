@@ -72,7 +72,7 @@ make_group(gp7,
 /* TODO: Add more instructions!!! */
 
 opcode_entry opcode_table [512] = {
-  /* 0x00 */	EMPTY, EMPTY, EMPTY, IDEXW(G2E,add,1),
+  /* 0x00 */	EMPTY, IDEX(G2E, add), EMPTY, IDEXW(G2E,add,1),
   /* 0x04 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x08 */	EMPTY, IDEX(G2E,or), EMPTY, EMPTY,
   /* 0x0c */	EMPTY, EMPTY, EMPTY, EX(2byte_esc),
@@ -86,10 +86,10 @@ opcode_entry opcode_table [512] = {
   /* 0x2c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x30 */	EMPTY, IDEX(G2E, xor), EMPTY, EMPTY,
   /* 0x34 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x38 */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0x38 */	EMPTY, EMPTY, EMPTY, IDEX(E2G,cmp),
   /* 0x3c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x40 */	EMPTY, EMPTY, EMPTY, IDEX(r,inc),
-  /* 0x44 */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0x44 */	EMPTY, EMPTY, EMPTY, IDEX(r,inc),
   /* 0x48 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x4c */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x50 */	IDEX(r,push), IDEX(r,push), IDEX(r,push), IDEX(r,push),
