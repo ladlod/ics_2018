@@ -229,6 +229,7 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   //TODO();
   static uint32_t flags_sf_masks[] = {0, 0x80, 0x8000, 0, 0x80000000};
   cpu.EFLAGS.SF = ((*result) & flags_sf_masks[width]) != 0;
+  //cpu.EFLAGS.SF = (((*result & (0xFFFFFFFF >> ((4 - width) * 8))) & (1 << (width * 8 - 1))) != 0);
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {
