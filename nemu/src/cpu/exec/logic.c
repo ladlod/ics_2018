@@ -5,32 +5,32 @@ make_EHelper(test) {
   //TODO();
 
   rtl_and(&t1, &id_src->val, &id_src2->val);
-  at = 0;
-  rtl_set_OF(&at);
-  rtl_set_CF(&at);
+  t0 = 0;
+  rtl_set_OF(&t0);
+  rtl_set_CF(&t0);
   operand_write(id_dest, &t1);
 
   print_asm_template2(test);
 }
 
 make_EHelper(and) {
-  rtl_and(&at, &id_dest->val, &id_src->val);
+  rtl_and(&t0, &id_dest->val, &id_src->val);
   //printf("and: 0x%x=0x%x&&0x%x\n", t1, id_dest->val, id_src->val);
-  operand_write(id_dest, &at);
+  operand_write(id_dest, &t0);
 
   print_asm_template2(and);
 }
 
 make_EHelper(xor) {
-  rtl_xor(&at, &id_dest->val, &id_src->val);
-  operand_write(id_dest, &at);
+  rtl_xor(&t0, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &t0);
 
   print_asm_template2(xor);
 }
 
 make_EHelper(or) {
-  rtl_or(&at, &id_dest->val, &id_src->val);
-  operand_write(id_dest, &at);
+  rtl_or(&t0, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &t0);
 
   print_asm_template2(or);
 }
@@ -81,7 +81,9 @@ make_EHelper(setcc) {
 }
 
 make_EHelper(not) {
-  TODO();
+  //TODO();
+  rtl_not(&t0, &id_dest->val);
+  operand_write(id_dest, &t0);  
 
   print_asm_template1(not);
 }
