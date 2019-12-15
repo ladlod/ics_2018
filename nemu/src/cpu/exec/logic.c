@@ -36,8 +36,23 @@ make_EHelper(or) {
 }
 
 make_EHelper(sar) {
-  TODO();
+  // TODO();
   // unnecessary to update CF and OF in NEMU
+  switch (id_dest->width)
+  {
+  case 1:
+    id_dest->val = (int8_t)id_dest->val;
+    break;
+  case 2:
+    id_dest->val = (int16_t)id_dest->val;
+    break;
+  default:
+    break;
+
+    rtl_sar(&t1, &id_dest->val, &id_src->val);
+    operand_write(id_dest, &t1);
+    rtl_update_ZFSF(&t1, id_dest->width);
+  }
 
   print_asm_template2(sar);
 }
