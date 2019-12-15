@@ -29,6 +29,7 @@ make_EHelper(cmp);
 make_EHelper(dec);
 make_EHelper(imul2);
 make_EHelper(idiv);
+make_EHelper(sbb);
 //logic.c
 make_EHelper(xor);
 make_EHelper(and);
@@ -38,5 +39,6 @@ make_EHelper(test);
 make_EHelper(sar);
 make_EHelper(not);
 make_EHelper(shl);
+make_EHelper(shr);
 //special.c
 make_EHelper(nop);

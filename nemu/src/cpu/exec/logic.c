@@ -76,7 +76,7 @@ make_EHelper(shl) {
   //printf("0x%x 0x%x\n", id_dest->val, id_src->val);
   rtl_shl(&t0, &id_dest->val, &id_src->val);
   operand_write(id_dest, &t0);
-  //rtl_update_ZFSF(&t0, id_dest->width);
+  rtl_update_ZFSF(&t0, id_dest->width);
 
   print_asm_template2(shl);
 }
