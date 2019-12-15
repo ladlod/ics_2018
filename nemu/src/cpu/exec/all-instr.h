@@ -37,5 +37,6 @@ make_EHelper(setcc);
 make_EHelper(test);
 make_EHelper(sar);
 make_EHelper(not);
+make_EHelper(shl);
 //special.c
 make_EHelper(nop);
