@@ -61,6 +61,7 @@ make_EHelper(inc) {
   //TODO();
   rtl_addi(&t0, &id_dest->val, 1);
   operand_write(id_dest, &t0);
+  rtl_update_ZFSF(&t0, id_dest->width);
 
   print_asm_template1(inc);
 }
@@ -68,6 +69,7 @@ make_EHelper(inc) {
 make_EHelper(dec) {
   rtl_subi(&t0, &id_dest->val, 1);
   operand_write(id_dest, &t0);
+  rtl_update_ZFSF(&t0, id_dest->width);
 
   print_asm_template1(dec);
 }
