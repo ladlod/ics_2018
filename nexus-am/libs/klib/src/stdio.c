@@ -7,7 +7,7 @@ int printf(const char *fmt, ...) {
   char out[256];
   sprintf(out, fmt);
   int len = strlen(out);
-  for(int i = 0; i < out; i++){
+  for(int i = 0; i < len; i++){
     _putc(out[i]);
   }
   return 0;
