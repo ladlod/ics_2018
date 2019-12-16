@@ -3,11 +3,22 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 size_t strlen(const char *s) {
-  return 0;
+  int l = 0;
+  while(*s){
+    l++;
+    s++;
+  }
+  return l;
 }
 
 char *strcpy(char* dst,const char* src) {
-  return NULL;
+  char *ret = dst;
+  while(*src){
+    *dst = *src;
+    dst++;
+    src++;
+  }
+  return ret;
 }
 
 char* strncpy(char* dst, const char* src, size_t n) {
@@ -15,11 +26,27 @@ char* strncpy(char* dst, const char* src, size_t n) {
 }
 
 char* strcat(char* dst, const char* src) {
-  return NULL;
+  char *ret = dst;
+  while(*dst){
+    dst++;
+  }
+  while(*src){
+    *dst = *src;
+    dst++;
+    src++;
+  }
+
+  return ret;
 }
 
 int strcmp(const char* s1, const char* s2) {
-  return 0;
+  int ret = 0;
+  while(ret == 0 && *s1 && *s2){
+    ret = *s1 - *s2;
+    s1++;
+    s2++;
+  }
+  return ret;
 }
 
 int strncmp(const char* s1, const char* s2, size_t n) {
@@ -27,7 +54,12 @@ int strncmp(const char* s1, const char* s2, size_t n) {
 }
 
 void* memset(void* v,int c,size_t n) {
-  return NULL;
+  void *ret = v;
+  while(n--){
+    *(char*)v = (char)c;
+    v = (char*) + 1;
+  }
+  return ret;
 }
 
 void* memcpy(void* out, const void* in, size_t n) {
@@ -35,7 +67,7 @@ void* memcpy(void* out, const void* in, size_t n) {
 }
 
 int memcmp(const void* s1, const void* s2, size_t n){
-  return 0;
+  return 1;
 }
 
 #endif

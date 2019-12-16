@@ -84,6 +84,6 @@ void difftest_step(uint32_t eip) {
   /*Assert(ref_r.EFLAGS.CF == cpu.EFLAGS.CF, "CF should be 0x%x, not 0x%x", ref_r.EFLAGS.CF, cpu.EFLAGS.CF);
   Assert(ref_r.EFLAGS.OF == cpu.EFLAGS.OF, "OF should be 0x%x, not 0x%x", ref_r.EFLAGS.OF , cpu.EFLAGS.OF);
   Assert(ref_r.EFLAGS.SF == cpu.EFLAGS.SF, "SF should be 0x%x, not 0x%x", ref_r.EFLAGS.SF , cpu.EFLAGS.SF);
-  Assert(ref_r.EFLAGS.ZF == cpu.EFLAGS.ZF, "ZF should be 0x%x, not 0x%x\neax=0x%x ebx=0x%x", ref_r.EFLAGS.ZF , cpu.EFLAGS.ZF, ref_r.eax, ref_r.ebx);
-  */ 
+  Assert(ref_r.EFLAGS.ZF == cpu.EFLAGS.ZF, "ZF should be 0x%x, not 0x%x", ref_r.EFLAGS.ZF , cpu.EFLAGS.ZF);
+  */
 }
