@@ -4,10 +4,20 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 int printf(const char *fmt, ...) {
+  char out[256];
+  sprintf(out, fmt);
+  int len = strlen(out);
+  for(int i = 0; i < out; i++){
+    _putc(out[i]);
+  }
   return 0;
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
+  while(*fmt){
+    fmt++;
+  }
+
   return 0;
 }
 
