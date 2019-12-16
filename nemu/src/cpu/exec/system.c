@@ -44,7 +44,7 @@ make_EHelper(iret) {
 
 make_EHelper(in) {
   //TODO();
-  //printf("src:0x%x width:%d ", id_src->val, id_src->width);
+  printf("src:0x%x width:%d ", id_src->val, id_src->width);
   switch (id_src->width)
   {
   case 1:
