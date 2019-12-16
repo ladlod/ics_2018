@@ -40,7 +40,9 @@ make_EHelper(xor) {
 
 make_EHelper(or) {
   rtl_or(&t1, &id_dest->val, &id_src->val);
+  //printf("t1=0x%x dest=0x%x src=0x%x\n", t1, id_dest->val, id_src->val);
   operand_write(id_dest, &t1);
+  t0 = 0;
   rtl_set_OF(&t0);
   rtl_set_CF(&t0);
   rtl_update_ZFSF(&t1, id_dest->width);
@@ -51,19 +53,9 @@ make_EHelper(or) {
 make_EHelper(sar) {
   // TODO();
   // unnecessary to update CF and OF in NEMU
-  switch (id_dest->width)
-  {
-  case 1:
-    id_dest->val = (int8_t)id_dest->val;
-    break;
-  case 2:
-    id_dest->val = (int16_t)id_dest->val;
-    break;
-  default:
-    break;
-  }
 
   rtl_sar(&t1, &id_dest->val, &id_src->val);
+  //printf("0x%x, 0x%x = 0x%x\n", id_dest->val, id_src->val, t1);
   operand_write(id_dest, &t1);
   rtl_update_ZFSF(&t1, id_dest->width);
 
