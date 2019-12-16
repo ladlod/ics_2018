@@ -29,6 +29,7 @@ static inline void idex(vaddr_t *eip, opcode_entry *e) {
 }
 
 static make_EHelper(2byte_esc);
+static make_EHelper(4byte_esc);
 
 #define make_group(name, item0, item1, item2, item3, item4, item5, item6, item7) \
   static opcode_entry concat(opcode_table_, name) [8] = { \
@@ -132,7 +133,7 @@ opcode_entry opcode_table [512] = {
   /* 0xe4 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xe8 */	IDEX(J, call), IDEX(J, jmp), EMPTY, IDEXW(J, jmp, 1),
   /* 0xec */	IDEXW(in_dx2a, in, 1), EMPTY, IDEXW(out_a2dx, out, 1), EMPTY,
-  /* 0xf0 */	EMPTY, EMPTY, EMPTY, EMPTY, //EX(2byte_esc),
+  /* 0xf0 */	EMPTY, EMPTY, EMPTY, EX(4byte_esc),
   /* 0xf4 */	EMPTY, EMPTY, IDEXW(E, gp3, 1), IDEX(E, gp3),
   /* 0xf8 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xfc */	EMPTY, EMPTY, IDEXW(E, gp4, 1), IDEX(E, gp5),
@@ -201,12 +202,18 @@ opcode_entry opcode_table [512] = {
   /* 0xec */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf4 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xf8 */	EMPTY, EMPTY, EMPTY, EMPTY,
+  /* 0xf8 */	EMPTY, EMPTY, EMPTY, EX(nop),
   /* 0xfc */	EMPTY, EMPTY, EMPTY, EMPTY
 };
 
 static make_EHelper(2byte_esc) {
   uint32_t opcode = instr_fetch(eip, 1) | 0x100;
+  decoding.opcode = opcode;
+  set_width(opcode_table[opcode].width);
+  idex(eip, &opcode_table[opcode]);
+}
+static make_EHelper(4byte_esc) {
+  uint32_t opcode = instr_fetch(eip, 3) | 0x100;
   decoding.opcode = opcode;
   set_width(opcode_table[opcode].width);
   idex(eip, &opcode_table[opcode]);
