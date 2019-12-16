@@ -31,6 +31,7 @@ make_EHelper(xor) {
   t0 = 0;
   rtl_set_OF(&t0);
   rtl_set_CF(&t0);
+  printf("0x%x=0x%x xor 0x%x\n", t1, id_dest->val, id_src->val);
   rtl_update_ZFSF(&t1, id_dest->width);
 
   operand_write(id_dest, &t1);
@@ -87,6 +88,7 @@ make_EHelper(setcc) {
   uint32_t cc = decoding.opcode & 0xf;
 
   rtl_setcc(&t2, cc);
+  //printf("t2=0x%x\n", t2);
   operand_write(id_dest, &t2);
 
   print_asm("set%s %s", get_cc_name(cc), id_dest->str);
