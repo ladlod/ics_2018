@@ -142,7 +142,7 @@ opcode_entry opcode_table [512] = {
   /* 0x00 */	EMPTY, IDEX(gp7_E, gp7), EMPTY, EMPTY,
   /* 0x04 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x08 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x0c */	EMPTY, EMPTY, EMPTY, IDEX(I, endbr32),
+  /* 0x0c */	EMPTY, EMPTY, EMPTY, IDEXW(I, endbr32, 1),
   /* 0x10 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x14 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x18 */	EMPTY, EMPTY, EMPTY, EMPTY,
