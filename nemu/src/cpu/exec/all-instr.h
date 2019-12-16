@@ -50,8 +50,3 @@ make_EHelper(nop);
 //system.c
 make_EHelper(in);
 make_EHelper(out);
-
-
-make_EHelper(endbr32){
-    print_asm_template1(endbr32);
-}
