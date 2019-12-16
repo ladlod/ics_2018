@@ -82,11 +82,10 @@ make_EHelper(out) {
     case 4:
       pio_write_l(id_dest->val, id_src->val);
       break;
-    printf("out:%d\n", id_dest->val);
     default:
       break;
   }
-
+  printf("out:%d\n", id_dest->val);
   print_asm_template2(out);
 
 #if defined(DIFF_TEST)
