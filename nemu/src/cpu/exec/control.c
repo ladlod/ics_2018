@@ -12,11 +12,10 @@ make_EHelper(jmp) {
 make_EHelper(jcc) {
   // the target address is calculated at the decode stage
   uint32_t cc = decoding.opcode & 0xf;
-  printf("cc:0x%x cc&0xe:0x%x cc&0x1:0x%x\n", cc, cc&0xe, cc&0x1);
-  printf("CF:%d ZF:%d SF:%d OF:%d\n", cpu.EFLAGS.CF, cpu.EFLAGS.ZF, cpu.EFLAGS.SF, cpu.EFLAGS.OF);
+  //printf("cc:0x%x cc&0xe:0x%x cc&0x1:0x%x\n", cc, cc&0xe, cc&0x1);
+  //printf("CF:%d ZF:%d SF:%d OF:%d\n", cpu.EFLAGS.CF, cpu.EFLAGS.ZF, cpu.EFLAGS.SF, cpu.EFLAGS.OF);
   rtl_setcc(&t0, cc);
   rtl_li(&t1, 0);
-  //printf("t0:%d t1:%d\n", t0, t1);
   rtl_jrelop(RELOP_NE, &t0, &t1, decoding.jmp_eip);
   //printf("is_jmp:%d eip:0x%x\n",decoding.is_jmp, cpu.eip);
   if(decoding.is_jmp)
