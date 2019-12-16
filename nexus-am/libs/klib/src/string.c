@@ -57,7 +57,7 @@ void* memset(void* v,int c,size_t n) {
   void *ret = v;
   while(n--){
     *(char*)v = (char)c;
-    v = (char*) + 1;
+    v = (char*)v + 1;
   }
   return ret;
 }
@@ -67,7 +67,13 @@ void* memcpy(void* out, const void* in, size_t n) {
 }
 
 int memcmp(const void* s1, const void* s2, size_t n){
-  return 1;
+  char ret = 0;
+  while(ret == 0 && n--){
+    ret = *(char*)s1 - *(char*)s2;
+    s1 = (char*)s1 + 1;
+    s2 = (char*)s2 + 1;
+  }
+  return ret;
 }
 
 #endif
