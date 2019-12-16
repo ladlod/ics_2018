@@ -47,3 +47,5 @@ make_EHelper(shl);
 make_EHelper(shr);
 //special.c
 make_EHelper(nop);
+//system.c
+make_EHelper(in);
