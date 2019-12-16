@@ -60,7 +60,7 @@ make_EHelper(in) {
     break;
   }
   //t0 = pio_read_b(id_src->val);
-  //printf("in:%d\n", t0);
+  printf("in:%d\n", t0);
   operand_write(id_dest, &t0);
 
   print_asm_template2(in);
