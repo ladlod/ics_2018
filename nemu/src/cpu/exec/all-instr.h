@@ -52,4 +52,6 @@ make_EHelper(in);
 make_EHelper(out);
 
 
-make_EHelper(endbr32);
+make_EHelper(endbr32){
+    
+}
