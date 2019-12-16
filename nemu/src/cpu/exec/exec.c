@@ -133,7 +133,7 @@ opcode_entry opcode_table [512] = {
   /* 0xe4 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xe8 */	IDEX(J, call), IDEX(J, jmp), EMPTY, IDEXW(J, jmp, 1),
   /* 0xec */	IDEXW(in_dx2a, in, 1), EMPTY, IDEXW(out_a2dx, out, 1), EMPTY,
-  /* 0xf0 */	EMPTY, EMPTY, EMPTY, EMPTY, //EX(4byte_esc),
+  /* 0xf0 */	EMPTY, EMPTY, EMPTY, EX(2byte_esc),
   /* 0xf4 */	EMPTY, EMPTY, IDEXW(E, gp3, 1), IDEX(E, gp3),
   /* 0xf8 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xfc */	EMPTY, EMPTY, IDEXW(E, gp4, 1), IDEX(E, gp5),
@@ -143,7 +143,7 @@ opcode_entry opcode_table [512] = {
   /* 0x00 */	EMPTY, IDEX(gp7_E, gp7), EMPTY, EMPTY,
   /* 0x04 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x08 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0x0c */	EMPTY, EMPTY, EMPTY, EMPTY,//IDEX(J, endbr32),
+  /* 0x0c */	EMPTY, EMPTY, EMPTY, IDEX(I, endbr32),
   /* 0x10 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x14 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0x18 */	EMPTY, EMPTY, EMPTY, EMPTY,
@@ -202,7 +202,7 @@ opcode_entry opcode_table [512] = {
   /* 0xec */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf0 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xf4 */	EMPTY, EMPTY, EMPTY, EMPTY,
-  /* 0xf8 */	EMPTY, EMPTY, EMPTY, EX(nop),
+  /* 0xf8 */	EMPTY, EMPTY, EMPTY, EMPTY,
   /* 0xfc */	EMPTY, EMPTY, EMPTY, EMPTY
 };
 
