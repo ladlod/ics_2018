@@ -36,8 +36,8 @@ make_EHelper(sub) { //dest=dest-src, src为有符号数
   //printf("sub: %d=%d-%d\n", t0, t1, t2);
   t3 = t0 > t1;
   rtl_set_CF(&t3);  //减数大于被减数时”进位“ 
-  t3 = (((int32_t)t1 < 0) && ((int32_t) t2 > 0) && ((int32_t) t0 > 0)) || //负数减正数得负数
-        (((int32_t) t1 > 0) && ((int32_t) t2 < 0) && ((int32_t) t0 < 0)); //正数减负数得正数
+  t3 = (((int32_t)t1 <= 0) && ((int32_t) t2 > 0) && ((int32_t) t0 > 0)) || //负数减正数得正数
+        (((int32_t) t1 >= 0) && ((int32_t) t2 < 0) && ((int32_t) t0 < 0)); //正数减负数得负数
   rtl_set_OF(&t3);
   rtl_update_ZFSF(&t0, 4);
 
@@ -48,7 +48,7 @@ make_EHelper(sub) { //dest=dest-src, src为有符号数
 
 make_EHelper(cmp) {
   //TODO();
-  printf("eax:0x%x ebx:0x%x\n", cpu.eax, cpu.ebx);
+  //printf("ebx:0x%x eax:0x%x\n", cpu.ebx, cpu.eax);
   //printf("dest:0x%x src:0x%x\n", id_dest->val, id_src->val);
   rtl_sext(&t1, &id_dest->val, id_dest->width);
 	rtl_sext(&t2, &id_src->val, id_src->width);
@@ -58,10 +58,11 @@ make_EHelper(cmp) {
   t3 = t0 > t1;
   rtl_set_CF(&t3);  //无符号数差大于被减数时发生”进位“ 
   //t3 = ((((int32_t)(t1) < 0) == (((int32_t)(t2) >> 31) == 0)) && (((int32_t)(t0) < 0) != ((int32_t)(t1) < 0)));
-  t3 = (((int32_t)t1 < 0) && ((int32_t) t2 > 0) && ((int32_t) t0 > 0)) || //负数减正数得负数
-        (((int32_t) t1 > 0) && ((int32_t) t2 < 0) && ((int32_t) t0 < 0)); //正数减负数得正数
+  t3 = (((int32_t)t1 <= 0) && ((int32_t) t2 > 0) && ((int32_t) t0 > 0)) || //负数减正数得正数
+        (((int32_t) t1 >= 0) && ((int32_t) t2 < 0) && ((int32_t) t0 < 0)); //正数减负数得负数
   rtl_set_OF(&t3);
   rtl_update_ZFSF(&t0, 4);
+  //printf("ZF:%d\n", cpu.EFLAGS.ZF);
   //printf("dest:0x%x src:0x%x\n", id_dest->val, id_src->val);
 
   print_asm_template2(cmp);

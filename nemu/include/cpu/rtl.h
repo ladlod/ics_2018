@@ -220,8 +220,9 @@ make_rtl_setget_eflags(SF)
 static inline void rtl_update_ZF(const rtlreg_t* result, int width) {
   // eflags.ZF <- is_zero(result[width * 8 - 1 .. 0])
   //TODO();
-  static uint32_t flags_zf_masks[] = {0, 0xff, 0xffff, 0, 0xfffffff};
-  cpu.EFLAGS.ZF = ((*result) & flags_zf_masks[width]) == 0;
+  static uint32_t flags_zf_masks[] = {0, 0xff, 0xffff, 0, 0xffffffff};
+  //printf("r:0x%x f:0x%x r&f:0x%x\n",(*result), flags_zf_masks[width], (*result) & flags_zf_masks[width]);
+  cpu.EFLAGS.ZF = !((*result) & flags_zf_masks[width]);
 }
 
 static inline void rtl_update_SF(const rtlreg_t* result, int width) {
@@ -229,7 +230,6 @@ static inline void rtl_update_SF(const rtlreg_t* result, int width) {
   //TODO();
   static uint32_t flags_sf_masks[] = {0, 0x80, 0x8000, 0, 0x80000000};
   cpu.EFLAGS.SF = ((*result) & flags_sf_masks[width]) != 0;
-  //cpu.EFLAGS.SF = (((*result & (0xFFFFFFFF >> ((4 - width) * 8))) & (1 << (width * 8 - 1))) != 0);
 }
 
 static inline void rtl_update_ZFSF(const rtlreg_t* result, int width) {

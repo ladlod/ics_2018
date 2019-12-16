@@ -28,7 +28,7 @@ make_EHelper(and) {
 
 make_EHelper(xor) {
   rtl_xor(&t1, &id_dest->val, &id_src->val);
-  printf("0x%x=0x%x xor 0x%x\n", t1, id_dest->val, id_src->val);
+  //printf("0x%x=0x%x xor 0x%x\n", t1, id_dest->val, id_src->val);
   t0 = 0;
   rtl_set_OF(&t0);
   rtl_set_CF(&t0);

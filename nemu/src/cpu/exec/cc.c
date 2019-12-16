@@ -29,10 +29,10 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
     case CC_S:
       *dest = cpu.EFLAGS.SF;
       break;
-    case CC_L:
-      *dest = cpu.EFLAGS.SF != cpu.EFLAGS.OF;
+    case CC_L: //c
+      *dest = (cpu.EFLAGS.SF != cpu.EFLAGS.OF);
       break;
-    case CC_LE:
+    case CC_LE: //e
       *dest = ((cpu.EFLAGS.ZF) || (cpu.EFLAGS.SF != cpu.EFLAGS.OF));
       break;
     default: panic("should not reach here");
