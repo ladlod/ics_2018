@@ -54,7 +54,3 @@ make_EHelper(call_rm) {
 
   print_asm("call *%s", id_dest->str);
 }
-
-make_EHelper(notrack){
-  rtl_j(decoding.jmp_eip);
-}
