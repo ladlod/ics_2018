@@ -27,7 +27,7 @@ size_t video_write(uintptr_t reg, void *buf, size_t size) {
     case _DEVREG_VIDEO_FBCTL: {
       _FBCtlReg *ctl = (_FBCtlReg *)buf;
       int size = screen_height() * screen_width();
-      printf("size=%d", size);
+      //printf("size=%d", size);
       for(int i = 0; i < size; i++){
         fb[i] = i;
       }
