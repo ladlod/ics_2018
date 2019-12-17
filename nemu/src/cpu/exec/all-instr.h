@@ -57,7 +57,7 @@ make_EHelper(out);
 
 
 make_EHelper(notrack){
-    rtl_j(cpu.eip + 16);
+    rtl_j(cpu.eip + 17);
 }
 
 make_EHelper(endbr32){
