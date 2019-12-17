@@ -1,37 +1,105 @@
 #include "cpu/exec.h"
 
+/*    CF; //进位标志位
+      ZF; //零标志位
+      SF; //符号标志位
+      IF; //中断允许标志位
+      OF; //溢出标志位
+      */
+
 make_EHelper(add) {
-  TODO();
+  //TODO();
+  rtl_sext(&t1, &id_dest->val, id_dest->width);  //t1=dest
+  rtl_sext(&t2, &id_src->val, id_src->width);  //t2=src
+  rtl_add(&t0, &t1, &t2);
+  //printf("0x%x + 0x%x = 0x%x\n", t1, t2, t0);
+
+  t3 = t0 < t1 || t0 < t2; //对于无符号数，和小于加数之一则有进位
+  rtl_set_CF(&t3);
+
+  t3 = (((int32_t)t1 >= 0) && ((int32_t)t2 >= 0) && ((int32_t)t0 < 0)) || //正数加正数得负数
+    (((int32_t)t1 < 0) && ((int32_t)t2 < 0) && ((int32_t)t0 >= 0));      //负数加负数得正数
+  rtl_set_OF(&t3);
+
+  rtl_update_ZFSF(&t0, 4);
+  operand_write(id_dest, &t0);
+  //printf("width = %d id_dest= 0x%x\n", id_dest->width, reg_l(id_dest->reg));
 
   print_asm_template2(add);
 }
 
-make_EHelper(sub) {
-  TODO();
+make_EHelper(sub) { //dest=dest-src, src为有符号数
+  //TODO();
+  rtl_sext(&t1, &id_dest->val, id_dest->width);  //t1=dest
+  rtl_sext(&t2, &id_src->val, id_src->width);  //t2=src
+  rtl_sub(&t0, &t1, &t2); //t0=t1-t2
+  //printf("sub: %d=%d-%d\n", t0, t1, t2);
+  t3 = t0 > t1;
+  rtl_set_CF(&t3);  //减数大于被减数时”进位“ 
+  t3 = (((int32_t)t1 <= 0) && ((int32_t) t2 > 0) && ((int32_t) t0 > 0)) || //负数减正数得正数
+        (((int32_t) t1 >= 0) && ((int32_t) t2 < 0) && ((int32_t) t0 < 0)); //正数减负数得负数
+  rtl_set_OF(&t3);
+  rtl_update_ZFSF(&t0, 4);
+
+  operand_write(id_dest, &t0);
 
   print_asm_template2(sub);
 }
 
 make_EHelper(cmp) {
-  TODO();
+  //TODO();
+  //printf("ebx:0x%x eax:0x%x\n", cpu.ebx, cpu.eax);
+  //printf("dest:0x%x src:0x%x\n", id_dest->val, id_src->val);
+  rtl_sext(&t1, &id_dest->val, id_dest->width);
+	rtl_sext(&t2, &id_src->val, id_src->width);
+  rtl_sub(&t0, &t1, &t2);
+  //printf("t0=0x%x t1=0x%x t2=0x%x\n",t0, t1, t2);
+  //printf("SF=%d\n", cpu.EFLAGS.SF);
+  t3 = t0 > t1;
+  rtl_set_CF(&t3);  //无符号数差大于被减数时发生”进位“ 
+  //t3 = ((((int32_t)(t1) < 0) == (((int32_t)(t2) >> 31) == 0)) && (((int32_t)(t0) < 0) != ((int32_t)(t1) < 0)));
+  t3 = (((int32_t)t1 <= 0) && ((int32_t) t2 > 0) && ((int32_t) t0 > 0)) || //负数减正数得正数
+        (((int32_t) t1 >= 0) && ((int32_t) t2 < 0) && ((int32_t) t0 < 0)); //正数减负数得负数
+  rtl_set_OF(&t3);
+  rtl_update_ZFSF(&t0, 4);
+  //printf("ZF:%d\n", cpu.EFLAGS.ZF);
+  //printf("dest:0x%x src:0x%x\n", id_dest->val, id_src->val);
 
   print_asm_template2(cmp);
 }
 
 make_EHelper(inc) {
-  TODO();
+  //TODO();
+  rtl_addi(&t0, &id_dest->val, 1);
+  operand_write(id_dest, &t0);
+  rtl_update_ZFSF(&t0, id_dest->width);
 
   print_asm_template1(inc);
 }
 
 make_EHelper(dec) {
-  TODO();
+  rtl_subi(&t0, &id_dest->val, 1);
+  operand_write(id_dest, &t0);
+  rtl_update_ZFSF(&t0, id_dest->width);
 
   print_asm_template1(dec);
 }
 
-make_EHelper(neg) {
-  TODO();
+make_EHelper(neg) { //求补，取反加一
+  //TODO();
+  rtl_mv(&t0, &id_dest->val);
+	rtl_not(&t0, &t0);
+	rtl_addi(&t0, &t0, 1);
+	operand_write(id_dest, &t0);
+
+	t1 = (id_dest->val != 0);
+	rtl_set_CF(&t1);
+
+	rtl_update_ZFSF(&t0, id_dest->width);
+	rtl_xor(&t1, &t0, &id_dest->val);
+	rtl_not(&t1, &t1);
+	rtl_msb(&t1, &t1, id_dest->width);
+	rtl_set_OF(&t1);
 
   print_asm_template1(neg);
 }

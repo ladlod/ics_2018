@@ -34,6 +34,8 @@ static inline make_DopHelper(SI) {
   assert(op->width == 1 || op->width == 4);
 
   op->type = OP_TYPE_IMM;
+  op->simm = instr_fetch(eip, op->width);  //读取立即数
+  op->simm = (op->simm) << (8*(4 - op->width)) >> (8 * (4 - op->width));
 
   /* TODO: Use instr_fetch() to read `op->width' bytes of memory
    * pointed by `eip'. Interpret the result as a signed immediate,
@@ -41,7 +43,6 @@ static inline make_DopHelper(SI) {
    *
    op->simm = ???
    */
-  TODO();
 
   rtl_li(&op->val, op->simm);
 
@@ -187,7 +188,9 @@ make_DHelper(r) {
 }
 
 make_DHelper(E) {
+  //printf("E\n");
   decode_op_rm(eip, id_dest, true, NULL, false);
+  //printf("E\n");
 }
 
 make_DHelper(setcc_E) {
@@ -285,6 +288,11 @@ make_DHelper(J) {
   decoding.jmp_eip = id_dest->simm + *eip;
 }
 
+/*make_DHELPER(notrack_J){
+  decode_op_SI(eip, id_dest, false);
+  decoding.jmp_eip = id_dest->simm + *eip;
+}*/
+
 make_DHelper(push_SI) {
   decode_op_SI(eip, id_dest, true);
 }
@@ -322,6 +330,7 @@ make_DHelper(out_a2dx) {
   sprintf(id_dest->str, "(%%dx)");
 #endif
 }
+
 
 void operand_write(Operand *op, rtlreg_t* src) {
   if (op->type == OP_TYPE_REG) { rtl_sr(op->reg, src, op->width); }
