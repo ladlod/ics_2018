@@ -5,7 +5,7 @@
 
 #define SCREEN_PORT 0x100
 
-static uint32_t* const fb __attribute__((used)) = (uint32_t *)0x40000;
+static uint32_t* const fb __attribute__((used)) = (uint32_t *)0x40000; //内存映射起始地址
 
 size_t video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
@@ -25,12 +25,12 @@ size_t video_write(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_FBCTL: {
       _FBCtlReg *ctl = (_FBCtlReg *)buf;
-      /*for(int i = 0; i < screen_height() * screen_width(); i++){
+      for(int i = 0; i < screen_height() * screen_width(); i++){
         fb[i] = i;
-      }*/
-      for(int i = 0; i < ctl->h; i++){
-        memcpy(fb + (ctl->y + i)*screen_width() + ctl->x, ctl->pixels + i*ctl->w, ctl->w*4);
       }
+      /*for(int i = 0; i < ctl->h; i++){
+        memcpy(fb + (ctl->y + i)*screen_width() + ctl->x, ctl->pixels + i*ctl->w, ctl->w*4);
+      }*/
       if (ctl->sync) {
         // do nothing, hardware syncs.
       }
