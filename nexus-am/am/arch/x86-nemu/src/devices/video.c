@@ -15,7 +15,7 @@ size_t video_read(uintptr_t reg, void *buf, size_t size) {
       screen_read = inl(SCREEN_PORT);
       //printf("screen: %d\n", screen_read);
       info->width = screen_read & 0xffff0000 >> 16;
-      info->height = screen_read & 0xffff; 
+      info->height = screen_read; //& 0xffff; 
       return sizeof(_VideoInfoReg);
     }
   }
