@@ -1,5 +1,6 @@
 #include "klib.h"
 #include <stdarg.h>
+#include <stdio.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
