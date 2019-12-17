@@ -12,10 +12,10 @@ size_t video_read(uintptr_t reg, void *buf, size_t size) {
     case _DEVREG_VIDEO_INFO: {
       _VideoInfoReg *info = (_VideoInfoReg *)buf;
       uint32_t screen;
-      screen= inl(SCREEN_PORT);
+      screen= inl(SCREEN_PORT); //0x26214700
       //printf("screen: 0x%x\n", screen);
-      info->height = screen >> 16;
-      info->width = screen & 0xffff; 
+      info->width = screen >> 16;
+      info->height = screen & 0xffff; 
       return sizeof(_VideoInfoReg);
     }
   }
