@@ -8,7 +8,7 @@ int main(){
   int sec = 1;
   //printf("%d-%d-%d\n", sec, sec+1, sec+2);
   while (1) {
-    while(uptime() < 1000 * sec) ;
+    while(uptime() < 10 * sec) ;
     get_timeofday(&rtc);
     printf("%d-%d-%d %02d:%02d:%02d GMT (", rtc.year, rtc.month, rtc.day, rtc.hour, rtc.minute, rtc.second);
     if (sec == 1) {

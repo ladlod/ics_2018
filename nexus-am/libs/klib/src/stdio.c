@@ -3,18 +3,9 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 int printf(const char *fmt, ...) {
-  /*char out[256];
-  sprintf(out, fmt);
-  int len = strlen(out);
-  for(int i = 0; i < len; i++){
-    _putc(out[i]);
-  }
-  return 0;
-  */
   va_list args;
   int i,len;
   char out[200];
-  //val = 0;
   va_start(args,fmt);
   vsprintf(out,fmt,args);
   va_end(args);
@@ -26,57 +17,7 @@ int printf(const char *fmt, ...) {
   return 0;
 }
 
-int vsprintf(char *out, const char *fmt, va_list ap) {
-  /*char *str = out;
-  char *s;
-  int num;
-  char num_s[256];
-  while(*fmt){
-    if(*fmt == '%'){ 
-      fmt++;
-      switch(*fmt){
-        case 's':
-          s = va_arg(ap, char*);
-          for(int i = 0; i < strlen(s); i++){
-            *str = *s;
-            str++;
-            s++;
-          }
-          break;
-        case 'd':
-            num = va_arg(ap, int);
-            int j = 0;
-            if(num == 0){
-              num_s[j] = 0;
-            }
-            else{
-              if(num < 0){
-                *str = '-';
-                num = -num;
-                str++;
-              }
-              while(num){
-                num_s[j] = num%10 + '0';
-                j++;
-              }
-            }
-            while(j--){
-              *str = num_s[j];
-              str++;
-            }
-            break;
-      }      
-    }
-    else{
-      *str = *fmt;
-      str++;
-    }
-    fmt++;
-  };
-  *str = '\0';
-
-  return 0;
-  */ 
+int vsprintf(char *out, const char *fmt, va_list ap) { 
   char c;
   char *str = out;
   const char *tmp;
@@ -84,21 +25,20 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   int i,j,len,num;
   int flag,field_width;
 
-  for(;*fmt; fmt++)
-  {
+  while(*fmt){
       if(*fmt != '%')
       {
-	  *str++ = *fmt;
-	  continue;
+	      *str++ = *fmt;
+	      continue;
       }
 
       flag = 0;
       fmt++;
       while(*fmt == ' ' || *fmt == '0')
       {
-	if(*fmt == ' ')  flag |= 8;
-	else if(*fmt == '0') flag |= 1;
-	fmt++;
+	      if(*fmt == ' ')  flag |= 8;
+	      else if(*fmt == '0') flag |= 1;
+	      fmt++;
       }
       
       field_width = 0;
@@ -115,40 +55,38 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 	      fmt++;
 	      field_width = va_arg(ap,int);
       }
-      //base = 10;
 
       switch(*fmt)
       {
-	  case 's':
-	      tmp = va_arg(ap,char *);
-	      len = strlen(tmp);
-	      for(i = 0;i < len;i ++)
-	      {
-		   *str++ = *tmp++;
-	      }
-	      continue;
-	  case 'd': break;
+	      case 's':
+	        tmp = va_arg(ap,char *);
+	        len = strlen(tmp);
+	        for(i = 0;i < len;i ++)
+	        {
+		        *str++ = *tmp++;
+	        }
+	        continue;
+	      case 'd': break;
       }
 
       num = va_arg(ap,int);
       j = 0;
       if(num == 0)
       {
-	  num_s[j++] = '0';
+	      num_s[j++] = '0';
       }
       else
       {
-	  if(num < 0)
-	  {
-	      *str++ = '-';
-	      num = -num;
-	  }
-	  //j = 0;
-	  while(num)
-	  {
-	      num_s[j++] = num%10 + '0';
-	      num /= 10;
-	  }
+	      if(num < 0)
+	      {
+	        *str++ = '-';
+	        num = -num;
+	      }
+	      while(num)
+	      {
+	        num_s[j++] = num%10 + '0';
+	        num /= 10;
+	      }
       }
       if(j < field_width)
       {
@@ -161,8 +99,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
       }
       while(j--)
       {
-	  *str++ = num_s[j];
+	      *str++ = num_s[j];
       }
+      fmt++;
   }
   *str = '\0';
   return 0;
@@ -170,7 +109,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 int sprintf(char *out, const char *fmt, ...) {
   va_list args;
-  int  val;
+  int val;
   va_start(args,fmt);
   val = vsprintf(out,fmt,args);
   va_end(args);
