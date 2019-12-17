@@ -58,3 +58,7 @@ make_EHelper(notrack){
     rtl_j(cpu.eip + 8);
     print_asm(notrack);
 }
+make_EHelper(endbr32){
+    rtl_j(cpu.eip + 4);
+    print_asm(notrack);
+}
