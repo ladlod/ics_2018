@@ -56,9 +56,12 @@ make_EHelper(in);
 make_EHelper(out);
 
 
-make_EHelper(notrack){
+/*make_EHelper(notrack){
+    vaddr_t addr;
+    vaddr_read(addr, );
+    printf("notrack jmp to 0x%x\n", vaddr_read());
     rtl_j(cpu.eip + 8);
-}
+}*/
 
 make_EHelper(endbr32){
     rtl_j(cpu.eip + 4);
