@@ -3,11 +3,25 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 int printf(const char *fmt, ...) {
-  char out[256];
+  /*char out[256];
   sprintf(out, fmt);
   int len = strlen(out);
   for(int i = 0; i < len; i++){
     _putc(out[i]);
+  }
+  return 0;
+  */
+  va_list args;
+  int i,len;
+  char out[200];
+  //val = 0;
+  va_start(args,fmt);
+  vsprintf(out,fmt,args);
+  va_end(args);
+  len = strlen(out);
+  for(i = 0;i < len;i ++)
+  {
+      _putc(out[i]);	  
   }
   return 0;
 }
