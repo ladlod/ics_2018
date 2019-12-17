@@ -1,7 +1,5 @@
 #include "klib.h"
 #include <stdarg.h>
-#include <stdio.h>
-
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 int printf(const char *fmt, ...) {
@@ -61,6 +59,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     }
     fmt++;
   };
+  *str = '\0';
 
   return 0;
 }
