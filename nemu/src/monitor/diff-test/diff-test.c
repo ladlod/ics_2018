@@ -78,7 +78,7 @@ void difftest_step(uint32_t eip) {
   Assert(ref_r.ecx == cpu.ecx, "ecx should be 0x%x, not 0x%x", ref_r.ecx, cpu.ecx);
   Assert(ref_r.edi == cpu.edi, "edi should be 0x%x, not 0x%x", ref_r.edi, cpu.edi);
   Assert(ref_r.edx == cpu.edx, "edx should be 0x%x, not 0x%x", ref_r.edx, cpu.edx);
-  //Assert(ref_r.eip == cpu.eip, "eip should be 0x%x, not 0x%x", ref_r.eip, cpu.eip);
+  Assert(ref_r.eip == cpu.eip, "eip should be 0x%x, not 0x%x", ref_r.eip, cpu.eip);
   Assert(ref_r.esi == cpu.esi, "esi should be 0x%x, not 0x%x", ref_r.esi, cpu.esi);
   Assert(ref_r.esp == cpu.esp, "esp should be 0x%x, not 0x%x", ref_r.esp, cpu.esp);
   /*Assert(ref_r.EFLAGS.CF == cpu.EFLAGS.CF, "CF should be 0x%x, not 0x%x", ref_r.EFLAGS.CF, cpu.EFLAGS.CF);
