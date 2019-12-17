@@ -14,9 +14,52 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
+  char *str = out;
+  char *s;
+  int num;
+  char num_s[1024];
   while(*fmt){
+    if(*fmt == '%'){ 
+      fmt++;
+      switch(*fmt){
+        case 's':
+          s = va_arg(ap, char*);
+          for(int i = 0; i < strlen(s); i++){
+            *str = *s;
+            str++;
+            s++;
+          }
+          break;
+        case 'd':
+            num = va_arg(ap, int);
+            int j = 0;
+            if(num == 0){
+              num_s[j] = 0;
+            }
+            else{
+              if(num < 0){
+                *str = '-';
+                num = -num;
+                str++;
+              }
+              while(num){
+                num_s[j] = num%10 + '0';
+                j++;
+              }
+            }
+            while(j--){
+              *str = num_s[j];
+              str++;
+            }
+            break;
+      }      
+    }
+    else{
+      *str = *fmt;
+      str++;
+    }
     fmt++;
-  }
+  };
 
   return 0;
 }
