@@ -6,7 +6,7 @@ int main(){
   //_RTCReg rtc;
   _ioe_init();
   int sec = 1;
-  printf("%d\n", sec);/*
+  printf("%d-%d-%d\n", sec, sec+1, sec+2);/*
   while (1) {
     while(uptime() < 1000 * sec) ;
     get_timeofday(&rtc);
