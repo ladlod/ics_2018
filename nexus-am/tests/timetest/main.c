@@ -3,10 +3,10 @@
 #include <klib.h>
 
 int main(){
-  //_RTCReg rtc;
+  _RTCReg rtc;
   _ioe_init();
   int sec = 1;
-  printf("%d-%d-%d\n", sec, sec+1, sec+2);/*
+  //printf("%d-%d-%d\n", sec, sec+1, sec+2);
   while (1) {
     while(uptime() < 1000 * sec) ;
     get_timeofday(&rtc);
@@ -17,6 +17,6 @@ int main(){
       printf("%d seconds).\n", sec);
     }
     sec ++;
-  }*/
+  }
   return 0;
 }
