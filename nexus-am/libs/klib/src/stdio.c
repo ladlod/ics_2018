@@ -28,7 +28,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
   while(*fmt){
       if(*fmt != '%')
       {
-	      *str++ = *fmt;
+	      *str = *fmt;
+        str++;
+        fmt++;
 	      continue;
       }
 
@@ -65,6 +67,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 	        {
 		        *str++ = *tmp++;
 	        }
+          fmt++;
 	        continue;
 	      case 'd': break;
       }
