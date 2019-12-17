@@ -3,7 +3,7 @@
 #include <amdev.h>
 #include <klib.h>
 
-#define SCREEN_PORT 0x100
+#define SCREEN_PORT 0x101
 
 static uint32_t* const fb __attribute__((used)) = (uint32_t *)0x40000; //内存映射起始地址
 
