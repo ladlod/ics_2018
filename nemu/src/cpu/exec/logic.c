@@ -105,7 +105,7 @@ make_EHelper(not) {
 }
 
 
-make_EHelper(rol){ //dest数据循环左移srcval次，更新ZF，SF
+make_EHelper(rol){ //dest数据循环左移src_val次，更新ZF，SF
   rtl_shl(&t0, &id_dest->val, &id_src->val);
 	if (decoding.is_operand_size_16) {
 		t3 = 0;
