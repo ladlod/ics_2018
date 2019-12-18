@@ -49,6 +49,7 @@ make_EHelper(pusha) {
   rtl_push(&cpu.edx);
   rtl_push(&cpu.eip);
   rtl_push(&cpu.esi);
+  rtl_push(&t0);
 
   print_asm("pusha");
 }

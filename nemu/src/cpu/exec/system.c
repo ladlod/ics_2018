@@ -10,7 +10,7 @@ make_EHelper(lidt) {
   cpu.IDTR.len = vaddr_read(id_dest->addr, 2);
   cpu.IDTR.base = vaddr_read(id_dest->addr + 2, 4);
   if(decoding.is_operand_size_16){
-    cpu.IDTR.base = cpu.IDTR.base & 0x00ffffff;
+    cpu.IDTR.base = cpu.IDTR.base & 0xffffff;
   }
 
   print_asm_template1(lidt);
@@ -35,7 +35,7 @@ make_EHelper(mov_cr2r) {
 
 make_EHelper(int) {
   //TODO();
-  raise_intr(id_dest->addr, decoding.seq_eip);
+  raise_intr(id_dest->val, decoding.seq_eip);
 
   print_asm("int %s", id_dest->str);
 
