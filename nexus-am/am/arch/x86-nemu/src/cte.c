@@ -9,10 +9,10 @@ void vecnull();
 
 _Context* irq_handle(_Context *tf) {
   _Context *next = tf;
-  printf("test1\n");
   if (user_handler) {
-    printf("test2\n");
+    printf("test1\n");
     _Event ev = {0};
+    printf("test2\n");
     printf("irq = 0x%x\n", tf->irq);
     switch (tf->irq) {
       case 0x81: ev.event = _EVENT_YIELD; break;
