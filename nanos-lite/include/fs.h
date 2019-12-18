@@ -8,3 +8,9 @@ enum {SEEK_SET, SEEK_CUR, SEEK_END};
 #endif
 
 #endif
+
+/*size_t fs_open(const char *pathname, int flags, int mode);
+size_t fs_close(int fd);
+size_t fs_size(int fd);
+size_t fs_read(int fd, void *buf, size_t len);
+size_t fs_write();*/

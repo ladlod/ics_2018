@@ -1,10 +1,13 @@
 #include "proc.h"
+#include "fs.h"
 
 #define DEFAULT_ENTRY 0x4000000
 
+extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
+
 static uintptr_t loader(PCB *pcb, const char *filename) {
-
-
+  //int fd = open(filename, 0, 0);
+  ramdisk_read((void *)DEFAULT_ENTRY, 0, 1);
   //TODO();
   return DEFAULT_ENTRY;
 }
