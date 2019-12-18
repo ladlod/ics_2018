@@ -4,7 +4,6 @@
 #define PMEM_SIZE (128 * 1024 * 1024)
 
 #define pmem_rw(addr, type) *(type *)({\
-    printf("0x%x\n", addr);\
     Assert(addr < PMEM_SIZE, "physical address(0x%08x) is out of bound", addr); \
     guest_to_host(addr); \
     })
