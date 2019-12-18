@@ -9,9 +9,9 @@ make_EHelper(lidt) {
 
   cpu.IDTR.len = vaddr_read(id_dest->addr, 2);
   cpu.IDTR.base = vaddr_read(id_dest->addr + 2, 4);
-  if(decoding.is_operand_size_16){
+  /*if(decoding.is_operand_size_16){
     cpu.IDTR.base = cpu.IDTR.base & 0xffffff;
-  }
+  }*/
   printf("base: 0x%x\n", cpu.IDTR.base);
 
   print_asm_template1(lidt);
