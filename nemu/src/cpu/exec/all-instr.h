@@ -59,7 +59,7 @@ make_EHelper(out);
 make_EHelper(lidt);
 make_EHelper(int);
 make_EHelper(iret);
-
+//make_Ehelper(test_1);
 
 /*make_EHelper(notrack){
     vaddr_t addr;
@@ -73,37 +73,15 @@ make_EHelper(endbr32){
     //print_asm(endbr32);
 }
 
-/*make_EHelper(stos){
-  if(id_dest->width == 4){
-    t0 = vaddr_read(cpu.cs+cpu.edi, 4);
-    rtl_lr(&cpu.eax, t0, 4);
-    if(cpu.EFLAGS.DF == 0){
-      rtl_addi(&cpu.edi, &cpu.edi, 4);
-    }
-    else{
-      rtl_subi(&cpu.edi, &cpu.edi, 4);
-    }
-  }
-	else if (id_dest->width == 2)
-{
-	t0 = vaddr_read(cpu.es+reg_w(R_DI), 2);
-	rtl_lr(&cpu.eax, t0, 2);
-	if(cpu.eflags.DF == 0){
-		rtl_addi(&cpu.edi, &cpu.edi, 2);
-	}
-	else{
-		rtl_subi(&cpu.edi, &cpu.edi, 2);
-	}
+make_EHelper(test_1){
+    printf("test1");
 }
-else{
-	t0 = vaddr_read(cpu.es+reg_w(R_DI), 1);
-	rtl_lr(&cpu.eax, t0, 1);
-	if(cpu.eflags.DF == 0){
-		rtl_addi(&cpu.edi, &cpu.edi, 1);
-	}
-	else{
-		rtl_subi(&cpu.edi, &cpu.edi, 1);
-	}
-    }
-    print_asm("stos");
-}*/
+make_EHelper(test_2){
+    printf("test2");
+}
+make_EHelper(test_3){
+    printf("test3");
+}
+make_EHelper(test_4){
+    printf("test4");
+}
