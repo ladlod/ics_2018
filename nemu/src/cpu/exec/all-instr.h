@@ -72,16 +72,3 @@ make_EHelper(endbr32){
     rtl_j(cpu.eip + 4);
     //print_asm(endbr32);
 }
-
-make_EHelper(test_1){
-    printf("test1");
-}
-make_EHelper(test_2){
-    printf("test2");
-}
-make_EHelper(test_3){
-    printf("test3");
-}
-make_EHelper(test_4){
-    printf("test4");
-}
