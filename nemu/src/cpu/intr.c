@@ -23,9 +23,10 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   printf("t1: 0x%x\n", t1);
   rtl_j(t1);
 
+  printf("flags: 0x%x\n", cpu.falgs);
   rtl_push(&cpu.falgs); //标志位寄存器入栈
   t0 = cpu.cs;
-  printf("t0: 0x%x\n", t0);
+  printf("cs: 0x%x\n", t0);
   rtl_push(&t0); //代码段寄存器入栈
   printf("ret_adr: 0x%x\n", ret_addr);
   rtl_push(&ret_addr); //返回地址入栈
