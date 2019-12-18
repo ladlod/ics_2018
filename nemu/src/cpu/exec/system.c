@@ -5,7 +5,10 @@ void difftest_skip_ref();
 void difftest_skip_dut();
 
 make_EHelper(lidt) {
-  TODO();
+  //TODO();
+
+  cpu.IDTR.len = vaddr_read(id_dest->val, 2);
+  cpu.IDTR.base = vaddr_read(id_dest->val + 2, 4);
 
   print_asm_template1(lidt);
 }
