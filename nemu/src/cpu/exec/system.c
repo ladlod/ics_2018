@@ -8,10 +8,10 @@ make_EHelper(lidt) {
   //TODO();
 
   cpu.IDTR.len = vaddr_read(id_dest->val, 2);
-  cpu.IDTR.base = vaddr_read(id_dest->val + 2, 4);
-  if(decoding.is_operand_size_16){
+  cpu.IDTR.base = vaddr_read(id_dest->val + 2, 4) & 0xffffff;
+  /*if(decoding.is_operand_size_16){
     cpu.IDTR.base = cpu.IDTR.base & 0x00ffffff;
-  }
+  }*/
 
   print_asm_template1(lidt);
 }
