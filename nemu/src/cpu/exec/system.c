@@ -7,8 +7,8 @@ void difftest_skip_dut();
 make_EHelper(lidt) {
   //TODO();
 
-  cpu.IDTR.len = vaddr_read(id_dest->val, 2);
-  cpu.IDTR.base = vaddr_read(id_dest->val + 2, 4) & 0xffffff;
+  cpu.IDTR.len = vaddr_read(id_dest->addr, 2);
+  cpu.IDTR.base = vaddr_read(id_dest->addr + 2, 4) & 0xffffff;
   /*if(decoding.is_operand_size_16){
     cpu.IDTR.base = cpu.IDTR.base & 0x00ffffff;
   }*/
