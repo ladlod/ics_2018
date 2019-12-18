@@ -12,6 +12,7 @@ _Context* irq_handle(_Context *tf) {
   if (user_handler) {
     printf("test1\n");
     _Event ev;
+    ev.event = 0;
     printf("test2\n");
     printf("irq = 0x%x\n", tf->irq);
     switch (tf->irq) {
