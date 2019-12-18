@@ -12,7 +12,7 @@ make_EHelper(lidt) {
   if(decoding.is_operand_size_16){
     cpu.IDTR.base = cpu.IDTR.base & 0xffffff;
   }
-  printf("base: 0x%x\n", cpu.IDTR.base);
+  //printf("base: 0x%x\n", cpu.IDTR.base);
 
   print_asm_template1(lidt);
 }
