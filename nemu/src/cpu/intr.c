@@ -28,7 +28,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   rtl_push(&t0); //代码段寄存器入栈
   rtl_push(&ret_addr); //返回地址入栈
 
-  cpu.EFLAGS.IF = 0; //不允许中断
+  //cpu.EFLAGS.IF = 0; //不允许中断
 }
 
 void dev_raise_intr() {
