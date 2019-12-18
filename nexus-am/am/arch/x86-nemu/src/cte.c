@@ -15,7 +15,7 @@ _Context* irq_handle(_Context *tf) {
     //ev.event = 0;
     //printf("test2\n");
     //printf("");
-    printf("irq = 0x%x\n", tf->irq);
+    printf("irq = %d = 0x%x\n", tf->irq, tf->irq);
     switch (tf->irq) {
       case 0x81: ev.event = _EVENT_YIELD; break;
       default: ev.event = _EVENT_ERROR; break;
