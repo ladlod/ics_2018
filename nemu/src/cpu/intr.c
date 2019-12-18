@@ -28,6 +28,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   t0 = cpu.cs;
   printf("t0: 0x%x\n", t0);
   rtl_push(&t0); //代码段寄存器入栈
+  printf("ret_adr: 0x%x\n", ret_addr);
   rtl_push(&ret_addr); //返回地址入栈
 
   //cpu.EFLAGS.IF = 0; //不允许中断
