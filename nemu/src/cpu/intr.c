@@ -21,7 +21,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   item.hi = vaddr_read(addr + 4, 4);
 
   t1 = (item.g.offset_15_0 & 0xffff) | ((item.g.offset_31_16 & 0xffff) << 16);
-  //printf("t1: 0x%x\n", t1);
+  printf("t1: 0x%x\n", t1);
   rtl_j(t1);
 
   rtl_push(&cpu.falgs); //标志位寄存器入栈
