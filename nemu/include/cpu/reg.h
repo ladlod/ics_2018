@@ -54,6 +54,13 @@ union{
     uint32_t falgs;
   };
 
+  struct {
+    uint16_t len; //长度
+    uint32_t base; //首地址
+  } IDTR;
+
+  uint16_t cs; //代码段寄存器
+
 } CPU_state;
 
 extern CPU_state cpu;
