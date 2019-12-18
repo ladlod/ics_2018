@@ -19,7 +19,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   item.lo = vaddr_read(addr, 4);
   item.hi = vaddr_read(addr + 4, 4);
 
-  rtl_j((item.g.offset_15_0 & 0xFFFF) | ((item.g.offset_31_16 & 0xFFFF) << 16));
+  rtl_j((item.g.offset_15_0 & 0xffff) | ((item.g.offset_31_16 & 0xffff) << 16));
 
   rtl_push(&cpu.falgs); //标志位寄存器入栈
   t0 = cpu.cs;
