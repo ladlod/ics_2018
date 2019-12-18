@@ -8,6 +8,8 @@ typedef void (*EHelper) (vaddr_t *);
 
 #include "cpu/decode.h"
 
+void raise_intr(uint8_t NO, vaddr_t ret_addr);
+
 static inline uint32_t instr_fetch(vaddr_t *eip, int len) {
   uint32_t instr = vaddr_read(*eip, len);
 #ifdef DEBUG
