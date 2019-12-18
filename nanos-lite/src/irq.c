@@ -2,7 +2,7 @@
 
 static _Context* do_event(_Event e, _Context* c) {
   switch (e.event) {
-    case _EVENT_YIELD: panic("yield %d\n", e.event);
+    case _EVENT_YIELD: printf("yield %d\n", e.event);
     default: panic("Unhandled event ID = %d", e.event);
   }
 
