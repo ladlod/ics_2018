@@ -21,7 +21,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
 
   t1 = (item.g.offset_15_0 & 0xffff) | ((item.g.offset_31_16 & 0xffff) << 16);
   printf("jmpto: 0x%x\n", t1);
-  //rtl_j(t1);
+  rtl_j(t1);
 
   printf("flags: 0x%x\n", cpu.falgs);
   rtl_push(&cpu.falgs); //标志位寄存器入栈
