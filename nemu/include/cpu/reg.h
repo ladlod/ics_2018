@@ -17,7 +17,6 @@ enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };  //8bits
 
 typedef struct {
 
-
   /*struct {
     uint32_t _32;
     uint16_t _16;
