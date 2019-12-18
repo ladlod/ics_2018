@@ -16,6 +16,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   } item;
   vaddr_t addr;
   addr = 8 * NO + cpu.IDTR.base;
+  printf("addr: 0x%x\n", addr);
   item.lo = vaddr_read(addr, 4);
   item.hi = vaddr_read(addr + 4, 4);
 
