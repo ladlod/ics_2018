@@ -8,8 +8,9 @@ void vectrap();
 void vecnull();
 
 _Context* irq_handle(_Context *tf) {
-  printf("test\n");
+  printf("test1\n");
   _Context *next = tf;
+  printf("test2\n");
   if (user_handler) {
     _Event ev = {0};
     printf("irq = 0x%x\n", tf->irq);
