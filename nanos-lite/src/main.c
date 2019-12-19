@@ -24,10 +24,10 @@ int main() {
 #endif
 
   init_fs();
-  Log("done fs\n");
+  Log("done fs");
 
   init_proc();
-  Log("done proc\n");
+  Log("done proc");
 
 #ifdef HAS_CTE
   _yield();
