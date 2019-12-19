@@ -15,8 +15,8 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len) {
   printf("ramdisk_start:%d ramdisk_end:%d\n", &ramdisk_start, &ramdisk_end);
   printf("size:%d\n", RAMDISK_SIZE);
   printf("offset=%d len=%d\n", offset, len);
-  memcpy(buf, &ramdisk_start + offset, len);
-  printf("test");
+  memcpy(buf, &ramdisk_start + offset, len/8);
+  printf("test\n");
   return len;
 }
 
