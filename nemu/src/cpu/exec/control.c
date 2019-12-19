@@ -5,7 +5,7 @@ make_EHelper(jmp) {
   // the target address is calculated at the decode stage
   rtl_j(decoding.jmp_eip);
   
-  //printf("jmp 0x%x\n", decoding.jmp_eip);
+  printf("jmp 0x%x\n", decoding.jmp_eip);
   print_asm("jmp %x", decoding.jmp_eip);
 }
 
@@ -18,8 +18,8 @@ make_EHelper(jcc) {
   rtl_li(&t1, 0);
   rtl_jrelop(RELOP_NE, &t0, &t1, decoding.jmp_eip);
   //printf("is_jmp:%d eip:0x%x\n",decoding.is_jmp, cpu.eip);
-  /*if(decoding.is_jmp)
-    printf("j%s %x\n", get_cc_name(cc), decoding.jmp_eip);*/
+  if(decoding.is_jmp)
+    printf("j%s %x\n", get_cc_name(cc), decoding.jmp_eip);
   print_asm("j%s %x", get_cc_name(cc), decoding.jmp_eip);
 }
 
