@@ -64,11 +64,11 @@ void* memset(void* v,int c,size_t n) {
 
 void* memcpy(void* out, const void* in, size_t n) {
   void *ret = out;
+  char *begin1 = (char*)out;
+  const char *begin2 = (const char*)in;
   size_t i = 0;
   while(i < n){
-    *(char*)out = *(const char*)in;
-    out++;
-    in++;
+    *(begin1 + i) = *(begin2 + i);
     i++;
   }
 
