@@ -11,7 +11,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //int fd = open(filename, 0, 0);
   //size_t len = get_ramdisk_size() / 8;
   //printf("len = %d\n", len);
-  ramdisk_read((void *)DEFAULT_ENTRY, 1, 1);
+  ramdisk_read((void *)DEFAULT_ENTRY, 1, get_ramdisk_size() - 1);
   Log("done ramdisk read");
   //TODO();
   return DEFAULT_ENTRY;
