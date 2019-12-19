@@ -27,6 +27,7 @@ int main() {
   printf("done fs\n");
 
   init_proc();
+  printf("done proc\n");
 
 #ifdef HAS_CTE
   _yield();

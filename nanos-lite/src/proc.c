@@ -22,7 +22,6 @@ void hello_fun(void *arg) {
 }
 
 void init_proc() {
-  printf("init_proc\n");
   naive_uload(NULL, NULL);
 }
 
