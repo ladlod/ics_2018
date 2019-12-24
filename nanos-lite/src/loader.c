@@ -7,10 +7,6 @@ extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t get_ramdisk_size();
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  //printf("test");
-  //int fd = open(filename, 0, 0);
-  //size_t len = get_ramdisk_size() / 8;
-  //printf("len = %d\n", len);
   ramdisk_read((void *)DEFAULT_ENTRY, 0, get_ramdisk_size());
   Log("done ramdisk read");
   //TODO();
