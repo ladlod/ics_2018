@@ -11,7 +11,7 @@ _Context* do_syscall(_Context *c) {
 
   switch (a[0]) {
     case SYS_exit: 
-      _halt(0);
+      _halt(0); //code=？
       c->GPRx = 1;
       break;
     case SYS_yield: 
