@@ -11,8 +11,7 @@ _Context* do_syscall(_Context *c) {
 
   switch (a[0]) {
     case SYS_exit: 
-      printf("a1 =%d a2=%d a3=%d\n", a[1], a[2], a[3]);
-      _halt(a[3]);
+      _halt(0);
       c->GPRx = 1;
       break;
     case SYS_yield: 
