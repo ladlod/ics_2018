@@ -42,7 +42,7 @@ make_EHelper(pop) {
 make_EHelper(pop_toESP){
   rtl_pop(&t0);
   printf("t0:0x%x\n", t0);
-  cpu.esp = t0;
+  cpu.esp = t0 + 4;
 }
 
 make_EHelper(pusha) {
