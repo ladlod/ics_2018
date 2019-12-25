@@ -71,7 +71,7 @@ void* memcpy(void* out, const void* in, size_t n) {
     *(begin1 + i) = *(begin2 + i);
     i++;
   }
-  printf("i=%d\n", i);
+  //printf("i=%d\n", i);
 
   return ret;
 }
