@@ -21,12 +21,13 @@ _Context* do_syscall(_Context *c) {
       break;
     case SYS_open:
       break;
+    case SYS_read:
+      break;
     case SYS_write:
       c->GPRx = fs_write(a[1], (void*)a[2], a[3]);
-      /*for(int i = 0; i < a[3]; i++){
-        _putc(a[2] + i);
-      }*/
       break;
+    case SYS_brk:
+      c->GPRx = 0;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
