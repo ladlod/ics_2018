@@ -39,6 +39,10 @@ make_EHelper(pop) {
   print_asm_template1(pop);
 }
 
+make_EHelper(pop_toES){
+  rtl_pop(&cpu.esp);
+}
+
 make_EHelper(pusha) {
   t0 = cpu.esp;
   rtl_push(&cpu.eax);
