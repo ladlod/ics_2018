@@ -9,6 +9,7 @@ void vecnull();
 
 _Context* irq_handle(_Context *tf) {
   _Context *next = tf;
+  printf("test\n");
   if (user_handler) { 
     _Event ev;
     switch (tf->irq) {
