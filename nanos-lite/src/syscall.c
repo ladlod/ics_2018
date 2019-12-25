@@ -10,8 +10,15 @@ _Context* do_syscall(_Context *c) {
   //printf("a0=%d\n", a[0]);
 
   switch (a[0]) {
-    case SYS_exit: _halt(a[3]); break;
-    case SYS_yield: _yield(); break;
+    case SYS_exit: 
+      printf("a1 =%d a2=%d a3=%d\n", a[1], a[2], a[3]);
+      _halt(a[3]);
+      c->GPRx = 1;
+      break;
+    case SYS_yield: 
+      _yield();
+      c->GPRx = 1;
+      break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
