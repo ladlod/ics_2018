@@ -10,13 +10,13 @@ void vecnull();
 _Context* irq_handle(_Context *tf) {
   _Context *next = tf;
   if (user_handler) { 
-    printf("test\n");
     _Event ev;
     switch (tf->irq) {
       case 0x80: ev.event = _EVENT_SYSCALL; break;
       case 0x81: ev.event = _EVENT_YIELD; break;
       default: ev.event = _EVENT_ERROR; break;
     }
+    printf("event=%d\n", ev.event);
 
     next = user_handler(ev, tf);
     if (next == NULL) {
