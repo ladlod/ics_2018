@@ -1,5 +1,7 @@
 #include "fs.h"
 
+extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
+
 extern size_t serial_write(const void *buf, size_t offset, size_t len);
 extern size_t fb_write(const void *buf, size_t offset, size_t len);
 extern size_t events_read(void *buf, size_t offset, size_t len);
@@ -63,6 +65,7 @@ size_t fs_size(int fd){
   return file_table[fd].size;
 }
 size_t fs_read(int fd, void *buf, size_t len){
+  size_t size = fs_size(fd);
   switch(fd){
     case FD_STDIN:
     case FD_STDOUT:
@@ -70,6 +73,14 @@ size_t fs_read(int fd, void *buf, size_t len){
     case FD_FB:
       break;
     default:
+      if(file_table[fd].open_offset >= size){
+        return 0;
+      }
+      if(file_table[fd].open_offset + len > size){
+        len = size - file_table[fd].open_offset;
+      }
+      ramdisk_read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
+      file_table[fd].open_offset += len;
       break;
   }
 
