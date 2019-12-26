@@ -4,6 +4,7 @@
 int main() {
   //printf("test\n");
   FILE *fp = fopen("/share/texts/num", "r+");
+  printf("%d\n", fp);
   assert(fp);
 
   fseek(fp, 0, SEEK_END);
