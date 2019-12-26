@@ -1,6 +1,9 @@
 #include "fs.h"
 
 extern size_t serial_write(const void *buf, size_t offset, size_t len);
+extern size_t fb_write(const void *buf, size_t offset, size_t len);
+extern size_t events_read(void *buf, size_t offset, size_t len);
+extern size_t dispinfo_read(void *buf, size_t offset, size_t len);
 
 typedef size_t (*ReadFn) (void *buf, size_t offset, size_t len);
 typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
@@ -9,6 +12,7 @@ typedef struct {
   char *name;
   size_t size;
   size_t disk_offset;
+  size_t open_offset;
   ReadFn read;
   WriteFn write;
 } Finfo;
@@ -27,9 +31,10 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
-  {"stdin", 0, 0, invalid_read, invalid_write},
-  {"stdout", 0, 0, invalid_read, serial_write},
-  {"stderr", 0, 0, invalid_read, serial_write},
+  {"stdin", 0, 0, 0, invalid_read, invalid_write},
+  {"stdout", 0, 0, 0, invalid_read, serial_write},
+  {"stderr", 0, 0, 0, invalid_read, serial_write},
+  [FD_FB] = {"/dev/fb", 0, 0, 0, NULL, fb_write},
 #include "files.h"
 };
 
@@ -41,6 +46,13 @@ void init_fs() {
 }
 
 int fs_open(const char *pathname, int flags, int mode){
+  for(int i = 0; i < NR_FILES; i++){
+    if(strcmp(file_table[i].name, pathname) == 0){
+      file_table[i].open_offset = 0;
+      return i;
+    }
+  }
+  panic("Can't find the file");
   return -1;
 }
 int fs_close(int fd){
@@ -50,9 +62,20 @@ size_t fs_size(int fd){
   return file_table[fd].size;
 }
 size_t fs_read(int fd, void *buf, size_t len){
+  switch(fd){
+    case FD_STDIN:
+    case FD_STDOUT:
+    case FD_STDERR:
+    case FD_FB:
+      break;
+    default:
+      break;
+  }
+
   return len;
 }
 size_t fs_write(int fd,const void *buf, size_t len){
+  //size_t size = fs_size(fd);
   switch(fd){
     case FD_STDIN:
       break;
@@ -60,10 +83,15 @@ size_t fs_write(int fd,const void *buf, size_t len){
     case FD_STDERR:
       file_table[fd].write(buf, 0, len);
       break;
+    case FD_FB:
+      break;
     default:
       break;
   }
 
-
   return len;
+}
+
+size_t fs_lseek(int fd, size_t offest, int whence){
+  return 0;
 }
