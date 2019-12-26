@@ -4,7 +4,6 @@
 #include <sys/time.h>
 #include <assert.h>
 #include <time.h>
-#include <stdio.h>
 #include "syscall.h"
 
 #if defined(__ISA_X86__)
@@ -29,7 +28,7 @@ void _exit(int status) {
 }
 
 int _open(const char *path, int flags, mode_t mode) {
-  printf("test\n");
+  //printf("test\n");
   //_exit(SYS_open);
   return _syscall_(SYS_open, (uintptr_t)path, flags, mode);
 }
