@@ -122,8 +122,8 @@ _fopen_r (struct _reent *ptr,
   int flags, oflags;
   if ((flags = __sflags (ptr, mode, &oflags)) == 0)
     return NULL;
-  if ((fp = __sfp (ptr)) == NULL)
-    return NULL;
+  /*if ((fp = __sfp (ptr)) == NULL)
+    return NULL;*/
   if ((f = _open_r (ptr, file, oflags, 0666)) < 0)
     {
       _newlib_sfp_lock_start (); 
