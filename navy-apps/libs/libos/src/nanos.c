@@ -4,6 +4,7 @@
 #include <sys/time.h>
 #include <assert.h>
 #include <time.h>
+#include <stdio.h>
 #include "syscall.h"
 
 #if defined(__ISA_X86__)
