@@ -120,13 +120,10 @@ _fopen_r (struct _reent *ptr,
   register FILE *fp;
   register int f;
   int flags, oflags;
-  printf("1");
   if ((flags = __sflags (ptr, mode, &oflags)) == 0)
     return NULL;
-  printf("2");
   if ((fp = __sfp (ptr)) == NULL)
     return NULL;
-  printf("3");
   if ((f = _open_r (ptr, file, oflags, 0666)) < 0)
     {
       _newlib_sfp_lock_start (); 
