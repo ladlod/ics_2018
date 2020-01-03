@@ -7,13 +7,13 @@ extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 extern size_t get_ramdisk_size();
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  ramdisk_read((void *)DEFAULT_ENTRY, 0, get_ramdisk_size());
+  //amdisk_read((void *)DEFAULT_ENTRY, 0, get_ramdisk_size());
   //Log("done ramdisk read");
   //TODO();
-  //int fd = fs_open(filename, 0, 0);
-  //printf("fd=%d\n", fd);
-  //fs_read(fd, (void*)DEFAULT_ENTRY, fs_size(fd));
-  //fs_close(fd);
+  int fd = fs_open(filename, 0, 0);
+  printf("fd=%d\n", fd);
+  fs_read(fd, (void*)DEFAULT_ENTRY, fs_size(fd));
+  fs_close(fd);
 
   return DEFAULT_ENTRY;
 }
