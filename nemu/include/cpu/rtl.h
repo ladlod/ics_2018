@@ -191,7 +191,7 @@ static inline void rtl_pop(rtlreg_t* dest) { //出栈
   //TODO();
 }
 
-static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest, //条件判断选择源操作数或立即数
+static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest, 
   const rtlreg_t *src1, int imm) {
   // dest <- (src1 relop imm ? 1 : 0)
   // TODO();
