@@ -1,5 +1,6 @@
 # 2019hust cs 系统能力培养
 虚拟机方向，实验详情见[README_pre.md](https://github.com/ladlod/ics_2018/blob/master/README_pre.md)
+实验报告见[report](https://github.com/ladlod/ics_2018/blob/master/report)
 
 - PA0
   
